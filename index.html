@@ -16,8 +16,11 @@
           colors: {
             brand: {
               blue: '#2563eb',
-              indigo: '#4f46e5',
-              sky: '#0ea5e9',
+              indigo: '#6366f1',
+              sky: '#06b6d4',
+              violet: '#8b5cf6',
+              teal: '#14b8a6',
+              amber: '#f59e0b',
             },
           },
           fontFamily: {
@@ -55,23 +58,82 @@
     html { -webkit-tap-highlight-color: transparent; }
     body { font-family: 'Inter', sans-serif; }
     .font-mono { font-family: 'Fira Code', monospace; }
-    /* Hidden-until-visible reveal state for scroll animations */
+
+    /* Hidden-until-visible reveal state for scroll animations (fallback if JS/GSAP absent) */
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease-out, transform .6s ease-out; }
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
     /* Grid background accent */
     .grid-bg {
       background-image:
-        linear-gradient(to right, rgba(99,102,241,0.06) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(99,102,241,0.06) 1px, transparent 1px);
+        linear-gradient(to right, rgba(99,102,241,0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(99,102,241,0.05) 1px, transparent 1px);
       background-size: 48px 48px;
     }
-    ::selection { background: #4f46e5; color: #fff; }
-    /* Nicer focus rings */
-    a:focus-visible, button:focus-visible { outline: 2px solid #4f46e5; outline-offset: 3px; border-radius: 6px; }
+
+    /* Signature animated aurora — the distinctive hero backdrop */
+    .aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
+    .aurora::before, .aurora::after {
+      content: ""; position: absolute; width: 55vw; height: 55vw; border-radius: 50%;
+      filter: blur(90px); opacity: .55; mix-blend-mode: screen;
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    .aurora::before { top: -15%; left: -10%; background: radial-gradient(circle at 30% 30%, #8b5cf6, transparent 60%); }
+    .aurora::after  { bottom: -20%; right: -10%; background: radial-gradient(circle at 70% 70%, #06b6d4, transparent 60%); animation-delay: -9s; }
+    @keyframes drift {
+      0%   { transform: translate(0,0) scale(1); }
+      50%  { transform: translate(4%, 3%) scale(1.08); }
+      100% { transform: translate(-3%, -2%) scale(0.96); }
+    }
+
+    /* Subtle film grain so flat areas don't look template-flat */
+    .grain::after {
+      content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .035;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    /* Animated gradient text for the name */
+    .gradient-text {
+      background: linear-gradient(100deg, #6366f1, #06b6d4, #8b5cf6, #6366f1);
+      background-size: 300% 100%;
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      animation: shimmer 8s linear infinite;
+    }
+    @keyframes shimmer { to { background-position: 300% 0; } }
+
+    /* Glass card tilt — reacts to pointer via JS custom props.
+       Uses !important so it composes cleanly instead of fighting Tailwind's hover:-translate-y-1. */
+    .tilt { transform: perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px)) !important; transition: transform .25s ease-out; transform-style: preserve-3d; }
+    .tilt:hover { --ty: -6px; }
+
+    /* Gradient hairline border for featured cards */
+    .ring-gradient { position: relative; }
+    .ring-gradient::before {
+      content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+      background: linear-gradient(135deg, rgba(99,102,241,.5), rgba(6,182,212,.4), transparent 60%);
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+    }
+
+    ::selection { background: #6366f1; color: #fff; }
+    a:focus-visible, button:focus-visible { outline: 2px solid #06b6d4; outline-offset: 3px; border-radius: 6px; }
+
+    /* Respect user motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+      .reveal { opacity: 1 !important; transform: none !important; }
+    }
   </style>
+
+  <!-- GSAP for premium scroll + hover motion (CDN, no build step) -->
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 </head>
 
-<body class="bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-200 antialiased transition-colors duration-300">
+<body class="grain bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-200 antialiased transition-colors duration-300">
+
+  <!-- Skip link for keyboard/screen-reader users -->
+  <a href="#about" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-brand-indigo focus:text-white">Skip to content</a>
 
   <!-- ============ NAVBAR ============ -->
   <header id="navbar" class="fixed top-0 inset-x-0 z-50 border-b border-slate-200/60 dark:border-slate-800/60 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md transition-colors duration-300">
@@ -122,14 +184,13 @@
   <main>
     <!-- ============ HERO ============ -->
     <section id="hero" class="relative pt-32 pb-24 sm:pt-40 sm:pb-32 grid-bg overflow-hidden">
-      <!-- Glow accents -->
-      <div class="pointer-events-none absolute -top-24 -left-24 w-96 h-96 bg-brand-indigo/20 rounded-full blur-3xl"></div>
-      <div class="pointer-events-none absolute top-20 right-0 w-80 h-80 bg-brand-blue/20 rounded-full blur-3xl"></div>
+      <!-- Signature animated aurora backdrop -->
+      <div class="aurora" aria-hidden="true"></div>
 
-      <div class="relative max-w-6xl mx-auto px-5 sm:px-8">
+      <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8">
         <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-4 animate-fade-up">Hi, my name is</p>
         <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight animate-fade-up">
-          Jay Clifferson P. Arevalo
+          <span class="gradient-text">Jay Clifferson P. Arevalo</span>
         </h1>
         <h2 class="mt-3 text-xl sm:text-2xl font-semibold text-slate-500 dark:text-slate-400 animate-fade-up">
           Aspiring <span class="text-brand-blue">Cloud Solutions Architect</span> &amp; Systems Developer
@@ -142,7 +203,7 @@
         </p>
 
         <p class="mt-6 max-w-2xl text-slate-600 dark:text-slate-400 leading-relaxed animate-fade-up">
-          Information Technology student at the Polytechnic University of the Philippines, DOST Scholar,
+          Information Technology student at the Polytechnic University of the Philippines, DataCamp Scholar,
           and student community leader. I build cloud-powered applications and systems — from AWS chatbots
           to C-based banking engines — while helping grow developer communities on campus.
         </p>
@@ -152,8 +213,7 @@
             class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-brand-indigo hover:bg-indigo-600 text-white font-medium shadow-lg shadow-brand-indigo/25 transition-all hover:-translate-y-0.5">
             <i class="ri-folder-open-line"></i> View Projects
           </a>
-          <!-- Replace href with your actual resume PDF path/URL -->
-          <a href="#" download
+          <a href="Jay_Clifferson_Arevalo_CV.pdf" download
             class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-slate-300 dark:border-slate-700 hover:border-brand-indigo hover:text-brand-indigo dark:hover:text-brand-sky font-medium transition-all hover:-translate-y-0.5">
             <i class="ri-download-line"></i> Download Resume (PDF)
           </a>
@@ -181,10 +241,10 @@
               systems development, and building solutions that make a real difference.
             </p>
             <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
-              As a <strong class="text-slate-800 dark:text-slate-200">DOST Scholar</strong> and
+              As a <strong class="text-slate-800 dark:text-slate-200">DataCamp Scholar</strong> and
               <strong class="text-slate-800 dark:text-slate-200">Devskolar</strong> (The Programmers' Guild),
               I combine strong academic foundations with hands-on project work. I graduated Senior High School
-              under the STEM strand with High Honors.
+              under the STEM strand with High Honors from Ramon Magsaysay (Cubao) High School.
             </p>
             <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
               Beyond coding, I'm deeply involved in student developer communities — leading operations and
@@ -199,7 +259,7 @@
                 <h3 class="font-semibold">Education</h3>
               </div>
               <p class="text-sm text-slate-600 dark:text-slate-400">BS Information Technology — PUP (2024–Present)</p>
-              <p class="text-sm text-slate-600 dark:text-slate-400">Senior High STEM — With High Honors</p>
+              <p class="text-sm text-slate-600 dark:text-slate-400">Senior High STEM — Ramon Magsaysay (Cubao) HS (2022–2024), With High Honors</p>
             </div>
             <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
               <div class="flex items-center gap-3 mb-3">
@@ -207,7 +267,7 @@
                 <h3 class="font-semibold">Key Distinctions</h3>
               </div>
               <div class="flex flex-wrap gap-2">
-                <span class="px-3 py-1 rounded-full text-xs font-medium bg-brand-indigo/10 text-brand-indigo dark:text-brand-sky border border-brand-indigo/20">DOST Scholar</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-brand-indigo/10 text-brand-indigo dark:text-brand-sky border border-brand-indigo/20">DataCamp Scholar</span>
                 <span class="px-3 py-1 rounded-full text-xs font-medium bg-brand-blue/10 text-brand-blue dark:text-sky-400 border border-brand-blue/20">Devskolar</span>
               </div>
             </div>
@@ -250,6 +310,8 @@
             <div class="flex flex-wrap gap-2">
               <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">AWS Lex</span>
               <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">AWS Lambda</span>
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">AWS Skill Builder</span>
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">Google Cloud</span>
               <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">GitHub</span>
               <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">GitHub Copilot</span>
             </div>
@@ -277,9 +339,11 @@
             <h3 class="font-semibold text-lg">Certifications</h3>
           </div>
           <div class="flex flex-wrap gap-2">
-            <span class="px-3 py-1.5 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Microsoft Learn — Python</span>
-            <span class="px-3 py-1.5 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Microsoft Learn — GitHub / Copilot</span>
-            <span class="px-3 py-1.5 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">NXplorers Scientific Innovation</span>
+            <span class="px-3 py-1.5 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Microsoft Learn — Get Started with Python</span>
+            <span class="px-3 py-1.5 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Microsoft Learn — GitHub &amp; Copilot</span>
+            <span class="px-3 py-1.5 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">DataCamp Scholar (DataCamp &amp; GDG PUP)</span>
+            <span class="px-3 py-1.5 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">NXplorers — Scientific Innovation (2×)</span>
+            <span class="px-3 py-1.5 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">7th Place — 22nd Philippine Robotics Olympiad (2023)</span>
           </div>
         </div>
       </div>
@@ -364,11 +428,11 @@
 
         <div class="grid sm:grid-cols-2 gap-6">
           <!-- BankerBot -->
-          <article class="reveal group flex flex-col p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-indigo hover:shadow-xl hover:shadow-brand-indigo/10 transition-all hover:-translate-y-1">
+          <article class="tilt reveal group flex flex-col p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-indigo hover:shadow-xl hover:shadow-brand-indigo/10 transition-all hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
               <i class="ri-robot-2-line text-3xl text-brand-indigo dark:text-brand-sky"></i>
               <!-- Replace href with your GitHub repo URL -->
-              <a href="#" aria-label="View BankerBot on GitHub" class="text-slate-400 hover:text-brand-indigo dark:hover:text-brand-sky transition-colors">
+              <a href="https://github.com/Magicman-jpeg" target="_blank" rel="noopener" aria-label="View BankerBot on GitHub" class="text-slate-400 hover:text-brand-indigo dark:hover:text-brand-sky transition-colors">
                 <i class="ri-github-fill text-2xl"></i>
               </a>
             </div>
@@ -382,10 +446,10 @@
           </article>
 
           <!-- C Bank Account Simulation -->
-          <article class="reveal group flex flex-col p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-blue hover:shadow-xl hover:shadow-brand-blue/10 transition-all hover:-translate-y-1">
+          <article class="tilt reveal group flex flex-col p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-blue hover:shadow-xl hover:shadow-brand-blue/10 transition-all hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
               <i class="ri-bank-line text-3xl text-brand-blue dark:text-sky-400"></i>
-              <a href="#" aria-label="View C Bank Account Simulation on GitHub" class="text-slate-400 hover:text-brand-indigo dark:hover:text-brand-sky transition-colors">
+              <a href="https://github.com/Magicman-jpeg" target="_blank" rel="noopener" aria-label="View C Bank Account Simulation on GitHub" class="text-slate-400 hover:text-brand-indigo dark:hover:text-brand-sky transition-colors">
                 <i class="ri-github-fill text-2xl"></i>
               </a>
             </div>
@@ -398,10 +462,10 @@
           </article>
 
           <!-- 2048 Game Clone -->
-          <article class="reveal group flex flex-col p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-sky hover:shadow-xl hover:shadow-brand-sky/10 transition-all hover:-translate-y-1">
+          <article class="tilt reveal group flex flex-col p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-sky hover:shadow-xl hover:shadow-brand-sky/10 transition-all hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
               <i class="ri-gamepad-line text-3xl text-brand-sky"></i>
-              <a href="#" aria-label="View 2048 Game Clone on GitHub" class="text-slate-400 hover:text-brand-indigo dark:hover:text-brand-sky transition-colors">
+              <a href="https://github.com/Magicman-jpeg" target="_blank" rel="noopener" aria-label="View 2048 Game Clone on GitHub" class="text-slate-400 hover:text-brand-indigo dark:hover:text-brand-sky transition-colors">
                 <i class="ri-github-fill text-2xl"></i>
               </a>
             </div>
@@ -415,10 +479,10 @@
           </article>
 
           <!-- OOP E-Portfolio -->
-          <article class="reveal group flex flex-col p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-indigo hover:shadow-xl hover:shadow-brand-indigo/10 transition-all hover:-translate-y-1">
+          <article class="tilt reveal group flex flex-col p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-indigo hover:shadow-xl hover:shadow-brand-indigo/10 transition-all hover:-translate-y-1">
             <div class="flex items-center justify-between mb-4">
               <i class="ri-pages-line text-3xl text-brand-indigo dark:text-brand-sky"></i>
-              <a href="#" aria-label="View OOP E-Portfolio on GitHub" class="text-slate-400 hover:text-brand-indigo dark:hover:text-brand-sky transition-colors">
+              <a href="https://github.com/Magicman-jpeg" target="_blank" rel="noopener" aria-label="View OOP E-Portfolio on GitHub" class="text-slate-400 hover:text-brand-indigo dark:hover:text-brand-sky transition-colors">
                 <i class="ri-github-fill text-2xl"></i>
               </a>
             </div>
@@ -474,22 +538,27 @@
       </p>
 
       <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-        <a href="mailto:jayclifferson.9.arevalo@yahoo.com"
+        <a href="mailto:jaycliffersonarevalo81@gmail.com"
           class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-brand-indigo hover:bg-indigo-600 text-white font-medium shadow-lg shadow-brand-indigo/25 transition-all hover:-translate-y-0.5">
           <i class="ri-mail-send-line"></i> Email Me
         </a>
-        <!-- Replace href with your GitHub profile URL -->
-        <a href="#"
+        <a href="https://github.com/Magicman-jpeg" target="_blank" rel="noopener"
           class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-slate-300 dark:border-slate-700 hover:border-brand-indigo hover:text-brand-indigo dark:hover:text-brand-sky font-medium transition-all hover:-translate-y-0.5">
           <i class="ri-github-fill"></i> GitHub
         </a>
       </div>
 
-      <!-- Social placeholders -->
-      <div class="reveal flex items-center justify-center gap-4 mb-10">
-        <a href="#" aria-label="GitHub" class="w-11 h-11 grid place-items-center rounded-full border border-slate-200 dark:border-slate-800 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo transition-all"><i class="ri-github-fill text-lg"></i></a>
-        <a href="#" aria-label="LinkedIn" class="w-11 h-11 grid place-items-center rounded-full border border-slate-200 dark:border-slate-800 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo transition-all"><i class="ri-linkedin-fill text-lg"></i></a>
-        <a href="mailto:jayclifferson.9.arevalo@yahoo.com" aria-label="Email" class="w-11 h-11 grid place-items-center rounded-full border border-slate-200 dark:border-slate-800 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo transition-all"><i class="ri-mail-line text-lg"></i></a>
+      <!-- Social links -->
+      <div class="reveal flex items-center justify-center flex-wrap gap-3 mb-10">
+        <a href="https://github.com/Magicman-jpeg" target="_blank" rel="noopener" aria-label="GitHub" class="w-11 h-11 grid place-items-center rounded-full border border-slate-200 dark:border-slate-800 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo transition-all"><i class="ri-github-fill text-lg"></i></a>
+        <a href="https://www.linkedin.com/in/jaycliffersonparevalo/" target="_blank" rel="noopener" aria-label="LinkedIn" class="w-11 h-11 grid place-items-center rounded-full border border-slate-200 dark:border-slate-800 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo transition-all"><i class="ri-linkedin-fill text-lg"></i></a>
+        <a href="https://x.com/Bernasproperty" target="_blank" rel="noopener" aria-label="X (Twitter)" class="w-11 h-11 grid place-items-center rounded-full border border-slate-200 dark:border-slate-800 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo transition-all"><i class="ri-twitter-x-fill text-lg"></i></a>
+        <a href="https://www.facebook.com/jayclifferson.arevalo" target="_blank" rel="noopener" aria-label="Facebook" class="w-11 h-11 grid place-items-center rounded-full border border-slate-200 dark:border-slate-800 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo transition-all"><i class="ri-facebook-fill text-lg"></i></a>
+        <a href="https://www.instagram.com/arevalo.depedqc/" target="_blank" rel="noopener" aria-label="Instagram" class="w-11 h-11 grid place-items-center rounded-full border border-slate-200 dark:border-slate-800 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo transition-all"><i class="ri-instagram-line text-lg"></i></a>
+        <a href="https://discord.gg/5ktg7kau" target="_blank" rel="noopener" aria-label="Discord" class="w-11 h-11 grid place-items-center rounded-full border border-slate-200 dark:border-slate-800 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo transition-all"><i class="ri-discord-fill text-lg"></i></a>
+        <a href="https://learn.microsoft.com/en-us/users/jaycliffersonparevalo-6300/" target="_blank" rel="noopener" aria-label="Microsoft Learn" class="w-11 h-11 grid place-items-center rounded-full border border-slate-200 dark:border-slate-800 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo transition-all"><i class="ri-microsoft-fill text-lg"></i></a>
+        <a href="https://www.meetup.com/members/428929098/" target="_blank" rel="noopener" aria-label="Meetup" class="w-11 h-11 grid place-items-center rounded-full border border-slate-200 dark:border-slate-800 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo transition-all"><i class="ri-group-fill text-lg"></i></a>
+        <a href="mailto:jaycliffersonarevalo81@gmail.com" aria-label="Email" class="w-11 h-11 grid place-items-center rounded-full border border-slate-200 dark:border-slate-800 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo transition-all"><i class="ri-mail-line text-lg"></i></a>
       </div>
 
       <p class="text-sm text-slate-500 dark:text-slate-500">
@@ -556,16 +625,80 @@
     }
     typeLoop();
 
-    // ---- Scroll reveal (IntersectionObserver) ----
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
+    // ---- Motion preferences ----
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // ---- Scroll reveal: GSAP ScrollTrigger when available, IntersectionObserver fallback ----
+    function initReveals() {
+      const items = document.querySelectorAll('.reveal');
+      if (reduceMotion) { items.forEach(el => el.classList.add('is-visible')); return; }
+
+      if (window.gsap && window.ScrollTrigger) {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Staggered reveal, grouped by parent so grids animate together
+        items.forEach((el) => {
+          gsap.fromTo(el,
+            { autoAlpha: 0, y: 28 },
+            {
+              autoAlpha: 1, y: 0, duration: 0.7, ease: 'power3.out',
+              scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+              onStart: () => el.classList.add('is-visible'),
+            }
+          );
+        });
+
+        // Hero parallax on the aurora
+        const aurora = document.querySelector('.aurora');
+        if (aurora) {
+          gsap.to(aurora, {
+            yPercent: 18, ease: 'none',
+            scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom top', scrub: true },
+          });
         }
+
+        // Timeline line draws in as you scroll the experience section
+        const line = document.querySelector('#experience .bg-gradient-to-b');
+        if (line) {
+          gsap.fromTo(line, { scaleY: 0, transformOrigin: 'top' }, {
+            scaleY: 1, ease: 'none',
+            scrollTrigger: { trigger: '#experience', start: 'top 70%', end: 'bottom 80%', scrub: true },
+          });
+        }
+      } else {
+        // Fallback
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+          });
+        }, { threshold: 0.12 });
+        items.forEach(el => observer.observe(el));
+      }
+    }
+    // GSAP is loaded with defer; init after load so it's ready
+    window.addEventListener('load', initReveals);
+
+    // ---- Pointer tilt on cards (skipped when reduced motion) ----
+    if (!reduceMotion && window.matchMedia('(hover: hover)').matches) {
+      document.querySelectorAll('.tilt').forEach((card) => {
+        card.addEventListener('pointermove', (e) => {
+          const r = card.getBoundingClientRect();
+          const px = (e.clientX - r.left) / r.width - 0.5;
+          const py = (e.clientY - r.top) / r.height - 0.5;
+          card.style.setProperty('--ry', (px * 6).toFixed(2) + 'deg');
+          card.style.setProperty('--rx', (-py * 6).toFixed(2) + 'deg');
+        });
+        card.addEventListener('pointerleave', () => {
+          card.style.setProperty('--rx', '0deg');
+          card.style.setProperty('--ry', '0deg');
+        });
       });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
+
+    // ---- Navbar shadow on scroll ----
+    const nav = document.getElementById('navbar');
+    const onScroll = () => nav.classList.toggle('shadow-lg', window.scrollY > 8);
+    onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
 
     // ---- Current year ----
     document.getElementById('year').textContent = new Date().getFullYear();
