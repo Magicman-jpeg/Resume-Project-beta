@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jay Clifferson P. Arevalo — IT Student & Aspiring Cloud Solutions Architect</title>
+  <meta name="description" content="Portfolio of Jay Clifferson P. Arevalo — BS Information Technology student at PUP, aspiring Cloud Solutions Architect & Systems Developer. AWS, Python, Java, and community leadership." />
+
+  <!-- Tailwind CSS (CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue: '#2563eb',
+              indigo: '#4f46e5',
+              sky: '#0ea5e9',
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono: ['Fira Code', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+          },
+          keyframes: {
+            'fade-up': {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            'blink': {
+              '0%, 100%': { opacity: '1' },
+              '50%': { opacity: '0' },
+            },
+          },
+          animation: {
+            'fade-up': 'fade-up 0.6s ease-out forwards',
+            'blink': 'blink 1s step-end infinite',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Remixicon -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+
+  <style>
+    html { -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Inter', sans-serif; }
+    .font-mono { font-family: 'Fira Code', monospace; }
+    /* Hidden-until-visible reveal state for scroll animations */
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease-out, transform .6s ease-out; }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    /* Grid background accent */
+    .grid-bg {
+      background-image:
+        linear-gradient(to right, rgba(99,102,241,0.06) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(99,102,241,0.06) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    ::selection { background: #4f46e5; color: #fff; }
+    /* Nicer focus rings */
+    a:focus-visible, button:focus-visible { outline: 2px solid #4f46e5; outline-offset: 3px; border-radius: 6px; }
+  </style>
+</head>
+
+<body class="bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-200 antialiased transition-colors duration-300">
+
+  <!-- ============ NAVBAR ============ -->
+  <header id="navbar" class="fixed top-0 inset-x-0 z-50 border-b border-slate-200/60 dark:border-slate-800/60 bg-white/80 dark:bg-slate-950/80 backdrop-blur-md transition-colors duration-300">
+    <nav class="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+      <a href="#hero" class="font-mono font-semibold text-lg tracking-tight">
+        <span class="text-brand-indigo">&lt;</span>JC<span class="text-brand-blue">A</span><span class="text-brand-indigo">/&gt;</span>
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="hidden md:flex items-center gap-7 text-sm font-medium">
+        <li><a href="#about" class="hover:text-brand-indigo transition-colors">About</a></li>
+        <li><a href="#skills" class="hover:text-brand-indigo transition-colors">Skills</a></li>
+        <li><a href="#experience" class="hover:text-brand-indigo transition-colors">Experience</a></li>
+        <li><a href="#projects" class="hover:text-brand-indigo transition-colors">Projects</a></li>
+        <li><a href="#leadership" class="hover:text-brand-indigo transition-colors">Leadership</a></li>
+        <li><a href="#contact" class="hover:text-brand-indigo transition-colors">Contact</a></li>
+      </ul>
+
+      <div class="flex items-center gap-2">
+        <!-- Theme toggle -->
+        <button id="theme-toggle" aria-label="Toggle dark mode"
+          class="w-10 h-10 grid place-items-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <i class="ri-moon-line text-lg hidden dark:inline-block"></i>
+          <i class="ri-sun-line text-lg inline-block dark:hidden"></i>
+        </button>
+
+        <!-- Mobile menu button -->
+        <button id="menu-btn" aria-label="Open menu"
+          class="md:hidden w-10 h-10 grid place-items-center rounded-lg border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+          <i class="ri-menu-line text-lg"></i>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="md:hidden hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950">
+      <ul class="flex flex-col px-5 py-3 text-sm font-medium">
+        <li><a href="#about" class="block py-2.5 hover:text-brand-indigo">About</a></li>
+        <li><a href="#skills" class="block py-2.5 hover:text-brand-indigo">Skills</a></li>
+        <li><a href="#experience" class="block py-2.5 hover:text-brand-indigo">Experience</a></li>
+        <li><a href="#projects" class="block py-2.5 hover:text-brand-indigo">Projects</a></li>
+        <li><a href="#leadership" class="block py-2.5 hover:text-brand-indigo">Leadership</a></li>
+        <li><a href="#contact" class="block py-2.5 hover:text-brand-indigo">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="relative pt-32 pb-24 sm:pt-40 sm:pb-32 grid-bg overflow-hidden">
+      <!-- Glow accents -->
+      <div class="pointer-events-none absolute -top-24 -left-24 w-96 h-96 bg-brand-indigo/20 rounded-full blur-3xl"></div>
+      <div class="pointer-events-none absolute top-20 right-0 w-80 h-80 bg-brand-blue/20 rounded-full blur-3xl"></div>
+
+      <div class="relative max-w-6xl mx-auto px-5 sm:px-8">
+        <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-4 animate-fade-up">Hi, my name is</p>
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight leading-tight animate-fade-up">
+          Jay Clifferson P. Arevalo
+        </h1>
+        <h2 class="mt-3 text-xl sm:text-2xl font-semibold text-slate-500 dark:text-slate-400 animate-fade-up">
+          Aspiring <span class="text-brand-blue">Cloud Solutions Architect</span> &amp; Systems Developer
+        </h2>
+
+        <!-- Typing effect -->
+        <p class="mt-6 font-mono text-base sm:text-lg h-7">
+          <span class="text-slate-400 dark:text-slate-500">&gt;</span>
+          <span id="typing" class="text-brand-indigo dark:text-brand-sky font-medium"></span><span id="cursor" class="inline-block w-[2px] h-5 bg-brand-indigo dark:bg-brand-sky align-middle animate-blink"></span>
+        </p>
+
+        <p class="mt-6 max-w-2xl text-slate-600 dark:text-slate-400 leading-relaxed animate-fade-up">
+          Information Technology student at the Polytechnic University of the Philippines, DOST Scholar,
+          and student community leader. I build cloud-powered applications and systems — from AWS chatbots
+          to C-based banking engines — while helping grow developer communities on campus.
+        </p>
+
+        <div class="mt-8 flex flex-wrap gap-4">
+          <a href="#projects"
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-brand-indigo hover:bg-indigo-600 text-white font-medium shadow-lg shadow-brand-indigo/25 transition-all hover:-translate-y-0.5">
+            <i class="ri-folder-open-line"></i> View Projects
+          </a>
+          <!-- Replace href with your actual resume PDF path/URL -->
+          <a href="#" download
+            class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-slate-300 dark:border-slate-700 hover:border-brand-indigo hover:text-brand-indigo dark:hover:text-brand-sky font-medium transition-all hover:-translate-y-0.5">
+            <i class="ri-download-line"></i> Download Resume (PDF)
+          </a>
+        </div>
+
+        <div class="mt-6 flex items-center gap-3 text-sm text-slate-500 dark:text-slate-400">
+          <i class="ri-map-pin-line"></i> Quezon City, Philippines
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="py-20 border-t border-slate-200 dark:border-slate-800">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8">
+        <div class="reveal">
+          <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2">01 · About</p>
+          <h2 class="text-3xl font-bold mb-8">Who I Am</h2>
+        </div>
+
+        <div class="grid md:grid-cols-5 gap-10 items-start">
+          <div class="md:col-span-3 reveal">
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+              I'm a <strong class="text-slate-800 dark:text-slate-200">BS Information Technology</strong> student at the
+              Polytechnic University of the Philippines (2024–Present), passionate about cloud computing,
+              systems development, and building solutions that make a real difference.
+            </p>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed mb-4">
+              As a <strong class="text-slate-800 dark:text-slate-200">DOST Scholar</strong> and
+              <strong class="text-slate-800 dark:text-slate-200">Devskolar</strong> (The Programmers' Guild),
+              I combine strong academic foundations with hands-on project work. I graduated Senior High School
+              under the STEM strand with High Honors.
+            </p>
+            <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+              Beyond coding, I'm deeply involved in student developer communities — leading operations and
+              community relations across Microsoft, Google, and AWS campus clubs.
+            </p>
+          </div>
+
+          <div class="md:col-span-2 space-y-4 reveal">
+            <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+              <div class="flex items-center gap-3 mb-2">
+                <i class="ri-graduation-cap-line text-xl text-brand-indigo dark:text-brand-sky"></i>
+                <h3 class="font-semibold">Education</h3>
+              </div>
+              <p class="text-sm text-slate-600 dark:text-slate-400">BS Information Technology — PUP (2024–Present)</p>
+              <p class="text-sm text-slate-600 dark:text-slate-400">Senior High STEM — With High Honors</p>
+            </div>
+            <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50">
+              <div class="flex items-center gap-3 mb-3">
+                <i class="ri-award-line text-xl text-brand-indigo dark:text-brand-sky"></i>
+                <h3 class="font-semibold">Key Distinctions</h3>
+              </div>
+              <div class="flex flex-wrap gap-2">
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-brand-indigo/10 text-brand-indigo dark:text-brand-sky border border-brand-indigo/20">DOST Scholar</span>
+                <span class="px-3 py-1 rounded-full text-xs font-medium bg-brand-blue/10 text-brand-blue dark:text-sky-400 border border-brand-blue/20">Devskolar</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section id="skills" class="py-20 border-t border-slate-200 dark:border-slate-800">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8">
+        <div class="reveal">
+          <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2">02 · Skills</p>
+          <h2 class="text-3xl font-bold mb-10">Technical Toolkit</h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Programming Languages -->
+          <div class="reveal group p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-indigo hover:shadow-xl hover:shadow-brand-indigo/10 transition-all hover:-translate-y-1">
+            <div class="w-12 h-12 grid place-items-center rounded-xl bg-brand-indigo/10 text-brand-indigo dark:text-brand-sky mb-4 group-hover:scale-110 transition-transform">
+              <i class="ri-code-s-slash-line text-2xl"></i>
+            </div>
+            <h3 class="font-semibold text-lg mb-3">Programming Languages</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">Python</span>
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">C</span>
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">Java</span>
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">JavaScript</span>
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">HTML5</span>
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">CSS3</span>
+            </div>
+          </div>
+
+          <!-- Cloud & Infrastructure -->
+          <div class="reveal group p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-blue hover:shadow-xl hover:shadow-brand-blue/10 transition-all hover:-translate-y-1">
+            <div class="w-12 h-12 grid place-items-center rounded-xl bg-brand-blue/10 text-brand-blue dark:text-sky-400 mb-4 group-hover:scale-110 transition-transform">
+              <i class="ri-cloud-line text-2xl"></i>
+            </div>
+            <h3 class="font-semibold text-lg mb-3">Cloud &amp; Infrastructure</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">AWS Lex</span>
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">AWS Lambda</span>
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">GitHub</span>
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">GitHub Copilot</span>
+            </div>
+          </div>
+
+          <!-- Multimedia & Design -->
+          <div class="reveal group p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-sky hover:shadow-xl hover:shadow-brand-sky/10 transition-all hover:-translate-y-1">
+            <div class="w-12 h-12 grid place-items-center rounded-xl bg-brand-sky/10 text-brand-sky mb-4 group-hover:scale-110 transition-transform">
+              <i class="ri-palette-line text-2xl"></i>
+            </div>
+            <h3 class="font-semibold text-lg mb-3">Multimedia &amp; Design</h3>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">Filmora</span>
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">CapCut</span>
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">Canva</span>
+              <span class="px-3 py-1 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono">MS Office</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="reveal mt-8 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-gradient-to-br from-brand-indigo/5 to-brand-blue/5">
+          <div class="flex items-center gap-3 mb-4">
+            <i class="ri-medal-line text-xl text-brand-indigo dark:text-brand-sky"></i>
+            <h3 class="font-semibold text-lg">Certifications</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1.5 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Microsoft Learn — Python</span>
+            <span class="px-3 py-1.5 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Microsoft Learn — GitHub / Copilot</span>
+            <span class="px-3 py-1.5 rounded-md text-sm bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700">NXplorers Scientific Innovation</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE & LEADERSHIP TIMELINE ============ -->
+    <section id="experience" class="py-20 border-t border-slate-200 dark:border-slate-800">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8">
+        <div class="reveal">
+          <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2">03 · Experience</p>
+          <h2 class="text-3xl font-bold mb-10">Experience &amp; Leadership Timeline</h2>
+        </div>
+
+        <div class="relative pl-8 sm:pl-10">
+          <!-- Vertical line -->
+          <div class="absolute left-2 sm:left-3 top-2 bottom-2 w-0.5 bg-gradient-to-b from-brand-indigo via-brand-blue to-brand-sky"></div>
+
+          <!-- Item -->
+          <div class="reveal relative mb-10 group">
+            <span class="absolute -left-[26px] sm:-left-[30px] top-1 w-4 h-4 rounded-full bg-brand-indigo ring-4 ring-brand-indigo/20 group-hover:scale-125 transition-transform"></span>
+            <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-indigo transition-colors">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-lg">Director of Operations &amp; Strategic Affairs</h3>
+                <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-brand-indigo/10 text-brand-indigo dark:text-brand-sky">Current</span>
+              </div>
+              <p class="text-brand-blue dark:text-sky-400 font-medium text-sm mb-2">Microsoft Campus Club — PUP</p>
+              <p class="text-slate-600 dark:text-slate-400 text-sm">Leading operational strategy and coordinating cross-functional initiatives for one of the campus's largest tech communities.</p>
+            </div>
+          </div>
+
+          <!-- Item -->
+          <div class="reveal relative mb-10 group">
+            <span class="absolute -left-[26px] sm:-left-[30px] top-1 w-4 h-4 rounded-full bg-brand-blue ring-4 ring-brand-blue/20 group-hover:scale-125 transition-transform"></span>
+            <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-blue transition-colors">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-lg">Chief Community Relations Officer</h3>
+                <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-brand-blue/10 text-brand-blue dark:text-sky-400">2026–2027</span>
+              </div>
+              <p class="text-brand-blue dark:text-sky-400 font-medium text-sm mb-2">Google Developer Groups (GDG) on Campus PUP</p>
+              <p class="text-slate-600 dark:text-slate-400 text-sm">Driving community partnerships and engagement. Also serving as a <strong>Cloud Solution Cadet</strong>, deepening cloud expertise.</p>
+            </div>
+          </div>
+
+          <!-- Item -->
+          <div class="reveal relative mb-10 group">
+            <span class="absolute -left-[26px] sm:-left-[30px] top-1 w-4 h-4 rounded-full bg-brand-sky ring-4 ring-brand-sky/20 group-hover:scale-125 transition-transform"></span>
+            <div class="p-5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-sky transition-colors">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-1">
+                <h3 class="font-semibold text-lg">Dept. of Cloud Computing &amp; Infrastructure</h3>
+                <span class="font-mono text-xs px-2.5 py-1 rounded-full bg-brand-sky/10 text-brand-sky">Skill Builder</span>
+              </div>
+              <p class="text-brand-blue dark:text-sky-400 font-medium text-sm mb-2">AWS Cloud Club</p>
+              <p class="text-slate-600 dark:text-slate-400 text-sm">Participating in the AWS Skill Builder Program, building hands-on cloud infrastructure competencies.</p>
+            </div>
+          </div>
+
+          <!-- Badges -->
+          <div class="reveal relative group">
+            <span class="absolute -left-[26px] sm:-left-[30px] top-1 w-4 h-4 rounded-full bg-emerald-500 ring-4 ring-emerald-500/20 group-hover:scale-125 transition-transform"></span>
+            <div class="flex flex-wrap gap-3">
+              <div class="flex items-center gap-2 px-4 py-2 rounded-xl border border-emerald-500/30 bg-emerald-500/10">
+                <i class="ri-shield-star-line text-emerald-500"></i>
+                <span class="text-sm font-medium">DOST Scholar</span>
+              </div>
+              <div class="flex items-center gap-2 px-4 py-2 rounded-xl border border-amber-500/30 bg-amber-500/10">
+                <i class="ri-terminal-box-line text-amber-500"></i>
+                <span class="text-sm font-medium">Devskolar — The Programmers' Guild</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects" class="py-20 border-t border-slate-200 dark:border-slate-800">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8">
+        <div class="reveal">
+          <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2">04 · Projects</p>
+          <h2 class="text-3xl font-bold mb-10">Featured Projects</h2>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-6">
+          <!-- BankerBot -->
+          <article class="reveal group flex flex-col p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-indigo hover:shadow-xl hover:shadow-brand-indigo/10 transition-all hover:-translate-y-1">
+            <div class="flex items-center justify-between mb-4">
+              <i class="ri-robot-2-line text-3xl text-brand-indigo dark:text-brand-sky"></i>
+              <!-- Replace href with your GitHub repo URL -->
+              <a href="#" aria-label="View BankerBot on GitHub" class="text-slate-400 hover:text-brand-indigo dark:hover:text-brand-sky transition-colors">
+                <i class="ri-github-fill text-2xl"></i>
+              </a>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">BankerBot</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 flex-1">An AWS chatbot built with Amazon Lex and AWS Lambda for handling automated banking transactions through natural conversation.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-brand-blue/10 text-brand-blue dark:text-sky-400">AWS</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-brand-indigo/10 text-brand-indigo dark:text-brand-sky">Amazon Lex</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-brand-sky/10 text-brand-sky">Lambda</span>
+            </div>
+          </article>
+
+          <!-- C Bank Account Simulation -->
+          <article class="reveal group flex flex-col p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-blue hover:shadow-xl hover:shadow-brand-blue/10 transition-all hover:-translate-y-1">
+            <div class="flex items-center justify-between mb-4">
+              <i class="ri-bank-line text-3xl text-brand-blue dark:text-sky-400"></i>
+              <a href="#" aria-label="View C Bank Account Simulation on GitHub" class="text-slate-400 hover:text-brand-indigo dark:hover:text-brand-sky transition-colors">
+                <i class="ri-github-fill text-2xl"></i>
+              </a>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">C Bank Account Simulation System</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 flex-1">A C-based banking management engine using file handling to persist and manage account data, deposits, and withdrawals.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-slate-500/10 text-slate-600 dark:text-slate-300">C</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-brand-indigo/10 text-brand-indigo dark:text-brand-sky">File Handling</span>
+            </div>
+          </article>
+
+          <!-- 2048 Game Clone -->
+          <article class="reveal group flex flex-col p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-sky hover:shadow-xl hover:shadow-brand-sky/10 transition-all hover:-translate-y-1">
+            <div class="flex items-center justify-between mb-4">
+              <i class="ri-gamepad-line text-3xl text-brand-sky"></i>
+              <a href="#" aria-label="View 2048 Game Clone on GitHub" class="text-slate-400 hover:text-brand-indigo dark:hover:text-brand-sky transition-colors">
+                <i class="ri-github-fill text-2xl"></i>
+              </a>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">2048 Game Clone</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 flex-1">An interactive browser game recreating the classic 2048, built from scratch with vanilla JavaScript, HTML5, and CSS3.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-amber-500/10 text-amber-600 dark:text-amber-400">JavaScript</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-orange-500/10 text-orange-600 dark:text-orange-400">HTML5</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-brand-blue/10 text-brand-blue dark:text-sky-400">CSS3</span>
+            </div>
+          </article>
+
+          <!-- OOP E-Portfolio -->
+          <article class="reveal group flex flex-col p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:border-brand-indigo hover:shadow-xl hover:shadow-brand-indigo/10 transition-all hover:-translate-y-1">
+            <div class="flex items-center justify-between mb-4">
+              <i class="ri-pages-line text-3xl text-brand-indigo dark:text-brand-sky"></i>
+              <a href="#" aria-label="View OOP E-Portfolio on GitHub" class="text-slate-400 hover:text-brand-indigo dark:hover:text-brand-sky transition-colors">
+                <i class="ri-github-fill text-2xl"></i>
+              </a>
+            </div>
+            <h3 class="font-semibold text-lg mb-2">OOP E-Portfolio Website</h3>
+            <p class="text-slate-600 dark:text-slate-400 text-sm mb-4 flex-1">A portfolio hosted on GitHub Pages showcasing Java-based Object-Oriented Programming projects and coursework.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-red-500/10 text-red-600 dark:text-red-400">Java</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-brand-sky/10 text-brand-sky">GitHub Pages</span>
+              <span class="px-2.5 py-1 rounded-md text-xs font-mono bg-brand-indigo/10 text-brand-indigo dark:text-brand-sky">OOP</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LEADERSHIP ============ -->
+    <section id="leadership" class="py-20 border-t border-slate-200 dark:border-slate-800">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8">
+        <div class="reveal">
+          <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2">05 · Leadership</p>
+          <h2 class="text-3xl font-bold mb-4">Community Involvement</h2>
+          <p class="text-slate-600 dark:text-slate-400 max-w-2xl mb-10">Active across the three major tech ecosystems — Microsoft, Google, and AWS — on campus.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-3 gap-6">
+          <div class="reveal p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:-translate-y-1 hover:shadow-xl transition-all text-center">
+            <i class="ri-microsoft-line text-4xl text-[#00a4ef] mb-3"></i>
+            <h3 class="font-semibold mb-1">Microsoft Campus Club</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400">Director of Operations &amp; Strategic Affairs</p>
+          </div>
+          <div class="reveal p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:-translate-y-1 hover:shadow-xl transition-all text-center">
+            <i class="ri-google-line text-4xl text-[#4285f4] mb-3"></i>
+            <h3 class="font-semibold mb-1">GDG on Campus PUP</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400">Chief Community Relations Officer · Cloud Cadet</p>
+          </div>
+          <div class="reveal p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:-translate-y-1 hover:shadow-xl transition-all text-center">
+            <i class="ri-amazon-line text-4xl text-[#ff9900] mb-3"></i>
+            <h3 class="font-semibold mb-1">AWS Cloud Club</h3>
+            <p class="text-sm text-slate-500 dark:text-slate-400">Cloud Computing &amp; Infrastructure · Skill Builder</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ CONTACT FOOTER ============ -->
+  <footer id="contact" class="py-20 border-t border-slate-200 dark:border-slate-800 grid-bg">
+    <div class="max-w-3xl mx-auto px-5 sm:px-8 text-center">
+      <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2 reveal">06 · Contact</p>
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4 reveal">Let's Connect</h2>
+      <p class="text-slate-600 dark:text-slate-400 mb-8 reveal">
+        I'm always open to new opportunities, collaborations, and conversations about cloud and tech communities.
+      </p>
+
+      <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+        <a href="mailto:jayclifferson.9.arevalo@yahoo.com"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-brand-indigo hover:bg-indigo-600 text-white font-medium shadow-lg shadow-brand-indigo/25 transition-all hover:-translate-y-0.5">
+          <i class="ri-mail-send-line"></i> Email Me
+        </a>
+        <!-- Replace href with your GitHub profile URL -->
+        <a href="#"
+          class="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-slate-300 dark:border-slate-700 hover:border-brand-indigo hover:text-brand-indigo dark:hover:text-brand-sky font-medium transition-all hover:-translate-y-0.5">
+          <i class="ri-github-fill"></i> GitHub
+        </a>
+      </div>
+
+      <!-- Social placeholders -->
+      <div class="reveal flex items-center justify-center gap-4 mb-10">
+        <a href="#" aria-label="GitHub" class="w-11 h-11 grid place-items-center rounded-full border border-slate-200 dark:border-slate-800 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo transition-all"><i class="ri-github-fill text-lg"></i></a>
+        <a href="#" aria-label="LinkedIn" class="w-11 h-11 grid place-items-center rounded-full border border-slate-200 dark:border-slate-800 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo transition-all"><i class="ri-linkedin-fill text-lg"></i></a>
+        <a href="mailto:jayclifferson.9.arevalo@yahoo.com" aria-label="Email" class="w-11 h-11 grid place-items-center rounded-full border border-slate-200 dark:border-slate-800 hover:bg-brand-indigo hover:text-white hover:border-brand-indigo transition-all"><i class="ri-mail-line text-lg"></i></a>
+      </div>
+
+      <p class="text-sm text-slate-500 dark:text-slate-500">
+        &copy; <span id="year"></span> Jay Clifferson P. Arevalo. Built with Tailwind CSS &amp; vanilla JavaScript.
+      </p>
+    </div>
+  </footer>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script>
+    // ---- Theme toggle (persisted) ----
+    const root = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+
+    // Initialize from storage or system preference
+    (function initTheme() {
+      const saved = localStorage.getItem('theme');
+      if (saved === 'light') {
+        root.classList.remove('dark');
+      } else if (saved === 'dark') {
+        root.classList.add('dark');
+      } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        root.classList.remove('dark');
+      } else {
+        root.classList.add('dark'); // dark default
+      }
+    })();
+
+    themeToggle.addEventListener('click', () => {
+      root.classList.toggle('dark');
+      localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // ---- Mobile menu ----
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    // Close on link click
+    mobileMenu.querySelectorAll('a').forEach(link =>
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'))
+    );
+
+    // ---- Typing effect ----
+    const roles = ['BSIT Student at PUP', 'AWS & Cloud Enthusiast', 'Student Community Leader'];
+    const typingEl = document.getElementById('typing');
+    let roleIndex = 0, charIndex = 0, deleting = false;
+
+    function typeLoop() {
+      const current = roles[roleIndex];
+      if (!deleting) {
+        typingEl.textContent = current.slice(0, ++charIndex);
+        if (charIndex === current.length) {
+          deleting = true;
+          return setTimeout(typeLoop, 1600);
+        }
+      } else {
+        typingEl.textContent = current.slice(0, --charIndex);
+        if (charIndex === 0) {
+          deleting = false;
+          roleIndex = (roleIndex + 1) % roles.length;
+        }
+      }
+      setTimeout(typeLoop, deleting ? 45 : 90);
+    }
+    typeLoop();
+
+    // ---- Scroll reveal (IntersectionObserver) ----
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ---- Current year ----
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
