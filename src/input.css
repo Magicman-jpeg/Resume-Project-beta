@@ -78,6 +78,30 @@ body { font-family: 'Inter', sans-serif; }
   .spec-row { grid-template-columns: 1fr; gap: .5rem; }
 }
 
+/* ---- Status pill (cert roadmap: earned / in progress / target) ---- */
+.status {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-family: 'Fira Code', monospace; font-size: .68rem; font-weight: 500;
+  padding: .15rem .6rem; border-radius: 999px; white-space: nowrap;
+  border: 1px solid currentColor;
+}
+.status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.status-earned   { color: #1F7A6E; }
+.dark .status-earned { color: #3FA596; }
+.status-progress { color: #D96E36; }
+.dark .status-progress { color: #E8824A; }
+.status-target   { color: #9A8B72; }
+.dark .status-target { color: #B9AC92; }
+
+/* ---- Project outcome line (capability callout) ---- */
+.outcome {
+  display: flex; align-items: center; gap: .5rem;
+  font-family: 'Space Grotesk', 'Inter', sans-serif; font-weight: 600; font-size: .82rem;
+  padding-top: .5rem;
+}
+.outcome i { color: #D96E36; }
+.dark .outcome i { color: #E8824A; }
+
 /* ---- Atomic grid: warm goldenrod lines on the hero/contact ---- */
 .grid-bg {
   background-image:
