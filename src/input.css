@@ -2,74 +2,146 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---- Custom styles (ported from the inline <style> block) ---- */
+/* =====================================================================
+   Atomic Age × Y2K — custom styles
+   Mid-century modern base, one restrained iridescent Y2K accent.
+   ===================================================================== */
 
-html { -webkit-tap-highlight-color: transparent; }
+html { -webkit-tap-highlight-color: transparent; scroll-behavior: smooth; }
 body { font-family: 'Inter', sans-serif; }
 .font-mono { font-family: 'Fira Code', monospace; }
-.font-display { font-family: 'Playfair Display', ui-serif, Georgia, serif; }
-.font-grotesk { font-family: 'Darker Grotesque', 'Inter', sans-serif; }
+.font-display { font-family: 'Fraunces', ui-serif, Georgia, serif; }
+.font-grotesk { font-family: 'Space Grotesk', 'Inter', sans-serif; }
 
-/* Darker Grotesque reads small — bump size/weight/tracking when used as a heading */
-.heading-grotesk {
-  font-family: 'Darker Grotesque', 'Inter', sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  line-height: 0.95;
+/* Fraunces reads best for the hero with its optical / soft axis dialed in */
+.display-hero {
+  font-family: 'Fraunces', ui-serif, Georgia, serif;
+  font-weight: 600;
+  font-optical-sizing: auto;
+  letter-spacing: -0.02em;
+  line-height: 0.92;
 }
 
-/* Hidden-until-visible reveal state for scroll animations (fallback if JS/GSAP absent) */
+/* Space Grotesk section headings */
+.heading-grotesk {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 0.98;
+}
+
+/* ---- Scroll reveal (fallback if JS/GSAP absent) ---- */
 .reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease-out, transform .6s ease-out; }
 .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
-/* Grid background accent */
+/* ---- Thin confident mid-century rule ---- */
+.hairline { height: 2px; background: currentColor; opacity: .85; }
+
+/* ---- Atomic grid: warm goldenrod lines on the hero/contact ---- */
 .grid-bg {
   background-image:
-    linear-gradient(to right, rgba(99,102,241,0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(99,102,241,0.05) 1px, transparent 1px);
-  background-size: 48px 48px;
+    linear-gradient(to right, rgba(217,110,54,0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(217,110,54,0.06) 1px, transparent 1px);
+  background-size: 54px 54px;
 }
 
-/* Signature animated aurora — the distinctive hero backdrop */
+/* ---- Signature aurora, recolored to warm goldenrod + teal ---- */
 .aurora { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
 .aurora::before, .aurora::after {
   content: ""; position: absolute; width: 55vw; height: 55vw; border-radius: 50%;
-  filter: blur(90px); opacity: .55; mix-blend-mode: screen;
-  animation: drift 18s ease-in-out infinite alternate;
+  filter: blur(90px); opacity: .5; mix-blend-mode: multiply;
+  animation: drift 20s ease-in-out infinite alternate;
 }
-.aurora::before { top: -15%; left: -10%; background: radial-gradient(circle at 30% 30%, #8b5cf6, transparent 60%); }
-.aurora::after  { bottom: -20%; right: -10%; background: radial-gradient(circle at 70% 70%, #06b6d4, transparent 60%); animation-delay: -9s; }
+.aurora::before { top: -15%; left: -10%; background: radial-gradient(circle at 30% 30%, #E6B74A, transparent 62%); }
+.aurora::after  { bottom: -20%; right: -8%; background: radial-gradient(circle at 70% 70%, #1F7A6E, transparent 62%); animation-delay: -10s; }
+/* Dark mode: screen blend so the glow lifts off the espresso base */
+.dark .aurora::before, .dark .aurora::after { mix-blend-mode: screen; opacity: .42; }
 @keyframes drift {
   0%   { transform: translate(0,0) scale(1); }
   50%  { transform: translate(4%, 3%) scale(1.08); }
   100% { transform: translate(-3%, -2%) scale(0.96); }
 }
 
-/* Subtle film grain so flat areas don't look template-flat */
+/* ---- Film grain — retro print texture ---- */
 .grain::after {
-  content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .035;
+  content: ""; position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .05;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Glass card tilt — reacts to pointer via JS custom props.
-   Uses !important so it composes cleanly instead of fighting Tailwind's hover:-translate-y-1. */
-.tilt { transform: perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px)) !important; transition: transform .25s ease-out; transform-style: preserve-3d; }
-.tilt:hover { --ty: -6px; }
+/* ---- Atomic starburst mark (original, pure CSS) ----
+   A slow-rotating burst built from repeating conic rays. */
+.starburst {
+  width: 100%; height: 100%; border-radius: 50%;
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      #D96E36 0deg 6deg,
+      transparent 6deg 18deg
+    );
+  -webkit-mask: radial-gradient(circle, transparent 24%, #000 26%, #000 46%, transparent 48%);
+          mask: radial-gradient(circle, transparent 24%, #000 26%, #000 46%, transparent 48%);
+  opacity: .9;
+}
+.dark .starburst { background: repeating-conic-gradient(from 0deg, #E8824A 0deg 6deg, transparent 6deg 18deg); }
 
-/* Gradient hairline border for featured cards */
-.ring-gradient { position: relative; }
-.ring-gradient::before {
-  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
-  background: linear-gradient(135deg, rgba(99,102,241,.5), rgba(6,182,212,.4), transparent 60%);
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
+/* ---- Boomerang / lozenge section divider (original) ---- */
+.boomerang {
+  width: 72px; height: 18px; border-radius: 999px;
+  background: linear-gradient(90deg, #D96E36, #E6B74A);
+  position: relative;
+}
+.boomerang::before, .boomerang::after {
+  content: ""; position: absolute; top: 50%; width: 10px; height: 10px; border-radius: 50%;
+  transform: translateY(-50%);
+}
+.boomerang::before { left: -22px; background: #1F7A6E; }
+.boomerang::after  { right: -22px; background: #1F7A6E; }
+
+/* ---- Y2K frosted / iridescent panel — used ONCE in the hero ---- */
+.y2k-panel {
+  position: relative;
+  border-radius: 20px;
+  background: linear-gradient(135deg, rgba(255,255,255,.5), rgba(244,236,216,.25));
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.55);
+  box-shadow: 0 10px 40px rgba(43,37,32,.12);
+  overflow: hidden;
+}
+.y2k-panel::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .5;
+  background: linear-gradient(130deg,
+    rgba(138,111,209,.35) 0%,
+    rgba(63,165,150,.25) 35%,
+    rgba(240,197,96,.30) 68%,
+    rgba(217,110,54,.30) 100%);
+  mix-blend-mode: screen;
+}
+.dark .y2k-panel {
+  background: linear-gradient(135deg, rgba(60,54,48,.55), rgba(30,27,24,.35));
+  border-color: rgba(237,228,211,.18);
+  box-shadow: 0 10px 44px rgba(0,0,0,.45);
 }
 
-::selection { background: #6366f1; color: #fff; }
-a:focus-visible, button:focus-visible { outline: 2px solid #06b6d4; outline-offset: 3px; border-radius: 6px; }
+/* ---- Flat retro card — color block, no soft-grey SaaS shadow ---- */
+.retro-card {
+  border: 2px solid var(--edge, #2B2520);
+  border-radius: 14px;
+  transition: transform .25s ease-out, box-shadow .25s ease-out, background-color .25s ease-out;
+}
+.retro-card:hover { transform: translateY(-4px); box-shadow: 6px 6px 0 0 var(--edge, #2B2520); }
+.dark .retro-card { --edge: #EDE4D3; }
 
-/* Respect user motion preferences */
+/* ---- Glass card tilt — reacts to pointer via JS custom props ---- */
+.tilt { transform: perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px)) !important; transition: transform .25s ease-out; transform-style: preserve-3d; }
+
+/* ---- Selection + focus ---- */
+::selection { background: #D96E36; color: #F4ECD8; }
+a:focus-visible, button:focus-visible { outline: 2px solid #1F7A6E; outline-offset: 3px; border-radius: 6px; }
+.dark a:focus-visible, .dark button:focus-visible { outline-color: #3FA596; }
+
+/* ---- Respect user motion preferences ---- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   .reveal { opacity: 1 !important; transform: none !important; }
+  .starburst { animation: none !important; }
 }
