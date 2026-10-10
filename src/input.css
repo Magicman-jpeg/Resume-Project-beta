@@ -221,7 +221,32 @@ body { font-family: 'Inter', sans-serif; }
 a:focus-visible, button:focus-visible { outline: 2px solid #1BB5C9; outline-offset: 3px; border-radius: 6px; }
 .dark a:focus-visible, .dark button:focus-visible { outline-color: #3FE0F0; }
 
-/* ---- Respect user motion preferences ---- */
+/* ---- ASCII art (animated + static), CRT-cyber styled ---- */
+.ascii {
+  font-family: 'Fira Code', ui-monospace, monospace;
+  line-height: 1.05;
+  white-space: pre;
+  letter-spacing: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  margin: 0;
+}
+/* Animated wave canvas-of-text in the hero */
+.ascii-wave {
+  color: #1BB5C9;
+  font-size: clamp(5px, 1vw, 9px);
+  text-shadow: 0 0 6px rgba(27,181,201,.25);
+  overflow: hidden;
+}
+.dark .ascii-wave { color: #3FE0F0; text-shadow: 0 0 8px rgba(63,224,240,.35); }
+
+/* Static ASCII accents (footer sign-off, dividers) */
+.ascii-static { color: #567C8D; font-size: clamp(6px, 1.1vw, 11px); }
+.dark .ascii-static { color: #7FA8BC; }
+.ascii-static .glow { color: #1BB5C9; }
+.dark .ascii-static .glow { color: #3FE0F0; }
+
+/* Respect user motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   .reveal { opacity: 1 !important; transform: none !important; }
