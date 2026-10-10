@@ -231,6 +231,31 @@ a:focus-visible, button:focus-visible { outline: 2px solid #1BB5C9; outline-offs
   -webkit-user-select: none;
   margin: 0;
 }
+
+/* ---- Page-wide faint ASCII data layer (behind all content) ---- */
+.ascii-bg {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  font-family: 'Fira Code', ui-monospace, monospace;
+  white-space: pre; overflow: hidden;
+  font-size: 11px; line-height: 1.25;
+  color: #567C8D; opacity: .06;
+  /* extremely slow vertical drift */
+  animation: ascii-drift 180s linear infinite;
+}
+.dark .ascii-bg { color: #3FE0F0; opacity: .05; }
+@keyframes ascii-drift {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-33%); }
+}
+
+/* ---- Per-section ASCII corner accents (static, decorative) ---- */
+.ascii-corner {
+  position: absolute; pointer-events: none; z-index: 0;
+  font-family: 'Fira Code', ui-monospace, monospace;
+  white-space: pre; font-size: 10px; line-height: 1.15;
+  color: #1BB5C9; opacity: .12;
+}
+.dark .ascii-corner { color: #3FE0F0; opacity: .14; }
 /* Animated wave canvas-of-text in the hero */
 .ascii-wave {
   color: #1BB5C9;
@@ -252,4 +277,5 @@ a:focus-visible, button:focus-visible { outline: 2px solid #1BB5C9; outline-offs
   .reveal { opacity: 1 !important; transform: none !important; }
   .starburst { animation: none !important; }
   .grain::after { animation: none !important; }
+  .ascii-bg { animation: none !important; }
 }
