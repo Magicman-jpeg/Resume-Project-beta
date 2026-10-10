@@ -27,9 +27,6 @@
   <!-- Skip link -->
   <a href="#about" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-atomic-orange focus:text-paper">Skip to content</a>
 
-  <!-- Page-wide faint ASCII data layer (JS-filled, drifts extremely slowly) -->
-  <pre id="ascii-bg" aria-hidden="true" class="ascii-bg"></pre>
-
   <!-- ============ NAVBAR ============ -->
   <header id="navbar" class="fixed top-0 inset-x-0 z-50 border-b-2 border-ink/15 dark:border-shell/15 bg-paper/85 dark:bg-espresso/85 backdrop-blur-md transition-colors duration-300">
     <nav class="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
@@ -43,7 +40,6 @@
         <li><a href="#experience" class="hover:text-atomic-orange transition-colors">Experience</a></li>
         <li><a href="#projects" class="hover:text-atomic-orange transition-colors">Projects</a></li>
         <li><a href="#summary" class="hover:text-atomic-orange transition-colors">Summary</a></li>
-        <li><a href="#gallery" class="hover:text-atomic-orange transition-colors">Gallery</a></li>
         <li><a href="#contact" class="hover:text-atomic-orange transition-colors">Contact</a></li>
       </ul>
 
@@ -67,7 +63,6 @@
         <li><a href="#experience" class="block py-2.5 hover:text-atomic-orange">Experience</a></li>
         <li><a href="#projects" class="block py-2.5 hover:text-atomic-orange">Projects</a></li>
         <li><a href="#summary" class="block py-2.5 hover:text-atomic-orange">Summary</a></li>
-        <li><a href="#gallery" class="block py-2.5 hover:text-atomic-orange">Gallery</a></li>
         <li><a href="#contact" class="block py-2.5 hover:text-atomic-orange">Contact</a></li>
       </ul>
     </div>
@@ -520,20 +515,11 @@
       </div>
     </section>
 
-    <!-- ============ No. 06 — ASCII GALLERY ============ -->
-    <section id="gallery" class="ascii-gallery-section relative overflow-hidden py-24 border-t-2 border-ink/15 dark:border-shell/15">
-      <div class="max-w-6xl mx-auto px-5 sm:px-8">
-        <div class="reveal grid lg:grid-cols-12 gap-6 items-baseline mb-6">
-          <div class="lg:col-span-1 index-plate text-5xl sm:text-6xl text-atomic-orange">06</div>
-          <h2 class="lg:col-span-11 heading-grotesk text-5xl sm:text-7xl">ASCII Gallery</h2>
-        </div>
-        <p class="reveal max-w-2xl mb-10 text-ink/70 dark:text-shell/70 leading-relaxed">
-          Character studies rendered as terminal signals—cropped to reveal form without letting the source overwhelm the page.
-        </p>
-
-        <div class="ascii-gallery">
+    <!-- Page-wide ASCII artwork layer; decorative and intentionally behind content. -->
+    <div id="ascii-art-background" class="ascii-art-background" aria-hidden="true">
+      <div class="ascii-art-field">
           <!-- Artwork 1 -->
-          <figure class="ascii-art-panel ascii-art-panel--portrait plate" role="img" aria-label="Cropped ASCII portrait study one">
+          <div class="ascii-art-panel ascii-art-panel--portrait">
             <pre class="ascii-art" aria-hidden="true">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⣠⡶⡿⢿⣿⣛⣟⣿⡿⢿⢿⣷⣦⡀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⢰⣯⣷⣿⣿⣿⢟⠃⢿⣟⣿⣿⣾⣷⣽⣺⢆⠀⠀⠀⠀⠀
@@ -548,11 +534,10 @@
 ⠀⠀⠀⠀⠀⢸⠿⣿⡈⠋⠀⠀⡇⠀⠀⠀⢰⠃⢠⣿⡟⣿⣿⢻⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠸⡆⠛⠇⢀⡀⠀⡇⠀⠀⡞⠀⠀⣸⠟⡊⠁⠚⠌⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⡍⠨⠊⣒⠴⠀⡇⡴⠋⡋⢐⠐⠅⡀⠐⢠⠕⠂⢂⠀⠀⠀</pre>
-            <figcaption>Portrait fragment <span>01 / close signal</span></figcaption>
-          </figure>
+          </div>
 
           <!-- Artwork 2 -->
-          <figure class="ascii-art-panel ascii-art-panel--wide plate" role="img" aria-label="Cropped ASCII figure study two">
+          <div class="ascii-art-panel ascii-art-panel--wide">
             <pre class="ascii-art" aria-hidden="true">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⡤⠶⠶⠒⠒⠒⠒⠲⠶⠦⢤⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⠶⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⠀⠀⠈⠉⠓⠶⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⣤⣄⣠⡾⠋⠁⠀⣀⡀⠀⠀⢀⣴⡶⠀⡀⣠⡆⠀⠀⠀⢀⠀⠀⠀⠀⠀⠙⠷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -586,11 +571,10 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡏⢹⠁⠀⠈⡏⢹⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣷⣾⠀⠀⠀⣷⠾⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⠿⠛⠋⠀⠀⠀⠻⢤⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</pre>
-            <figcaption>Full figure <span>02 / long signal</span></figcaption>
-          </figure>
+          </div>
 
           <!-- Artwork 3 -->
-          <figure class="ascii-art-panel ascii-art-panel--feature plate" role="img" aria-label="Cropped ASCII portrait study three">
+          <div class="ascii-art-panel ascii-art-panel--feature">
             <pre class="ascii-art" aria-hidden="true">⠀⠀⠤⠔⢆⣀⡠⠤⠴⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠃⠀⠀⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⡀⠀⠀⠀⠀⠀
 ⠄⠀⠀⠀⠀⠀⠀⠀⠀⣘⡄⠀⠀⠀⠀⡄⠀⠀⠀⢸⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀⠀⠀⠀
 ⠀⠀⠀⠀⠀⢴⣊⣉⣉⡀⠀⠀⠀⠀⠀⡇⠀⠀⠀⡆⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀
@@ -634,8 +618,7 @@
 ⣿⡇⣤⣤⣀⠀⠀⢨⡟⠁⠀⠀⠀⠀⠀⠉⠢⣄⠙⠢⢌⣚⢭⣛⠾⠿⠿⠿⠉⣿⣿⣿⣛⣬⣶⢿⠻⠋⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢷⡧
 ⠿⠃⠀⠉⠛⢷⣦⣟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠲⢝⡫⠖⣬⣙⠲⢤⣤⣾⣿⠿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻
 ⠀⠀⠀⠀⠀⣰⠏⠙⠣⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠔⠋⢛⡷⢤⣛⣧⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡠⠊⢎⢣⡀⠀⠀⠀⠀⠀⠀⠀⠀</pre>
-            <figcaption>Portrait transmission <span>03 / wide signal</span></figcaption>
-          </figure>
+          </div>
 
           <!-- Artwork 4 is intentionally omitted from rendering: its source dimensions
                exceed this page's visual budget and would push captures beyond 8,000px. -->
@@ -674,9 +657,8 @@
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠀⠘⠀⠀⠀⣻⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⢧⡀⠀⠀⠀⠀⠀⠀
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⢿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠈⣿⡆⠀⠀⠀⠀⠀</pre>
           </template>
-        </div>
       </div>
-    </section>
+    </div>
   </main>
 
   <!-- ============ CONTACT FOOTER ============ -->
@@ -829,22 +811,6 @@
     onScroll(); window.addEventListener('scroll', onScroll, { passive: true });
 
     document.getElementById('year').textContent = new Date().getFullYear();
-
-    (function asciiBackground() {
-      const el = document.getElementById('ascii-bg');
-      if (!el) return;
-      const glyphs = '01<>/\\|-+=*:.· ░▒{}[]';
-      const COLS = 160, ROWS = 150;
-      let out = '';
-      for (let y = 0; y < ROWS; y++) {
-        for (let x = 0; x < COLS; x++) {
-          const r = Math.random();
-          out += r > 0.82 ? glyphs[Math.floor(Math.random() * glyphs.length)] : ' ';
-        }
-        out += '\n';
-      }
-      el.textContent = out;
-    })();
 
     (function asciiWave() {
       const el = document.getElementById('ascii-wave');
