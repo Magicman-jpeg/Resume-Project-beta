@@ -12,7 +12,7 @@
   <!-- Fonts: Fraunces (display) + Space Grotesk (headings) + Inter (body) + Fira Code (mono) -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600&family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&family=Noto+Sans+Symbols+2&display=swap" rel="stylesheet" />
 
   <!-- Remixicon -->
   <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
@@ -521,17 +521,20 @@
     </section>
 
     <!-- ============ No. 06 — ASCII GALLERY ============ -->
-    <section id="gallery" class="py-24 border-t-2 border-ink/15 dark:border-shell/15">
+    <section id="gallery" class="ascii-gallery-section relative overflow-hidden py-24 border-t-2 border-ink/15 dark:border-shell/15">
       <div class="max-w-6xl mx-auto px-5 sm:px-8">
-        <div class="reveal grid lg:grid-cols-12 gap-6 items-baseline mb-12">
+        <div class="reveal grid lg:grid-cols-12 gap-6 items-baseline mb-6">
           <div class="lg:col-span-1 index-plate text-5xl sm:text-6xl text-atomic-orange">06</div>
           <h2 class="lg:col-span-11 heading-grotesk text-5xl sm:text-7xl">ASCII Gallery</h2>
         </div>
+        <p class="reveal max-w-2xl mb-10 text-ink/70 dark:text-shell/70 leading-relaxed">
+          Character studies rendered as terminal signals—cropped to reveal form without letting the source overwhelm the page.
+        </p>
 
-        <div class="flex flex-col gap-8 reveal">
+        <div class="ascii-gallery">
           <!-- Artwork 1 -->
-          <div class="plate p-6 bg-paper dark:bg-espresso overflow-hidden">
-            <pre class="font-mono text-[10px] leading-[1.2] text-ink/80 dark:text-shell/80 overflow-x-auto text-center">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          <figure class="ascii-art-panel ascii-art-panel--portrait plate" role="img" aria-label="Cropped ASCII portrait study one">
+            <pre class="ascii-art" aria-hidden="true">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⣠⡶⡿⢿⣿⣛⣟⣿⡿⢿⢿⣷⣦⡀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⢰⣯⣷⣿⣿⣿⢟⠃⢿⣟⣿⣿⣾⣷⣽⣺⢆⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⢸⣿⢿⣾⢧⣏⡴⠀⠈⢿⣘⣿⢿⣿⣿⣿⣿⡆⠀⠀⠀⠀
@@ -545,11 +548,12 @@
 ⠀⠀⠀⠀⠀⢸⠿⣿⡈⠋⠀⠀⡇⠀⠀⠀⢰⠃⢠⣿⡟⣿⣿⢻⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠸⡆⠛⠇⢀⡀⠀⡇⠀⠀⡞⠀⠀⣸⠟⡊⠁⠚⠌⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⡍⠨⠊⣒⠴⠀⡇⡴⠋⡋⢐⠐⠅⡀⠐⢠⠕⠂⢂⠀⠀⠀</pre>
-          </div>
+            <figcaption>Portrait fragment <span>01 / close signal</span></figcaption>
+          </figure>
 
           <!-- Artwork 2 -->
-          <div class="plate p-6 bg-paper dark:bg-espresso overflow-hidden">
-            <pre class="font-mono text-[10px] leading-[1.2] text-ink/80 dark:text-shell/80 overflow-x-auto text-center">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⡤⠶⠶⠒⠒⠒⠒⠲⠶⠦⢤⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          <figure class="ascii-art-panel ascii-art-panel--wide plate" role="img" aria-label="Cropped ASCII figure study two">
+            <pre class="ascii-art" aria-hidden="true">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⡤⠶⠶⠒⠒⠒⠒⠲⠶⠦⢤⣄⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⠶⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠄⠀⠀⠀⠈⠉⠓⠶⣤⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⣤⣄⣠⡾⠋⠁⠀⣀⡀⠀⠀⢀⣴⡶⠀⡀⣠⡆⠀⠀⠀⢀⠀⠀⠀⠀⠀⠙⠷⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⡴⠞⠋⠁⠀⣰⡾⢋⡀⠀⠀⣰⡟⠀⠀⣤⣿⡿⠁⢈⣶⠏⢻⡌⠐⠁⢸⣆⠀⠀⠀⠀⠀⠀⠈⠳⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -582,11 +586,12 @@
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡏⢹⠁⠀⠈⡏⢹⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⣷⣾⠀⠀⠀⣷⠾⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠻⠿⠛⠋⠀⠀⠀⠻⢤⠿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀</pre>
-          </div>
+            <figcaption>Full figure <span>02 / long signal</span></figcaption>
+          </figure>
 
           <!-- Artwork 3 -->
-          <div class="plate p-6 bg-paper dark:bg-espresso overflow-hidden">
-            <pre class="font-mono text-[10px] leading-[1.2] text-ink/80 dark:text-shell/80 overflow-x-auto text-center">⠀⠀⠤⠔⢆⣀⡠⠤⠴⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠃⠀⠀⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⡀⠀⠀⠀⠀⠀
+          <figure class="ascii-art-panel ascii-art-panel--feature plate" role="img" aria-label="Cropped ASCII portrait study three">
+            <pre class="ascii-art" aria-hidden="true">⠀⠀⠤⠔⢆⣀⡠⠤⠴⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⠃⠀⠀⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣄⡀⠀⠀⠀⠀⠀
 ⠄⠀⠀⠀⠀⠀⠀⠀⠀⣘⡄⠀⠀⠀⠀⡄⠀⠀⠀⢸⠀⢀⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣦⡀⠀⠀⠀
 ⠀⠀⠀⠀⠀⢴⣊⣉⣉⡀⠀⠀⠀⠀⠀⡇⠀⠀⠀⡆⣴⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀
 ⠀⠀⠄⠀⠀⠀⠀⠀⠀⠈⠓⢄⠀⠀⠀⠇⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣧⠀
@@ -629,11 +634,13 @@
 ⣿⡇⣤⣤⣀⠀⠀⢨⡟⠁⠀⠀⠀⠀⠀⠉⠢⣄⠙⠢⢌⣚⢭⣛⠾⠿⠿⠿⠉⣿⣿⣿⣛⣬⣶⢿⠻⠋⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⢷⡧
 ⠿⠃⠀⠉⠛⢷⣦⣟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⠲⢝⡫⠖⣬⣙⠲⢤⣤⣾⣿⠿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⢄⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻
 ⠀⠀⠀⠀⠀⣰⠏⠙⠣⣄⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠔⠋⢛⡷⢤⣛⣧⣿⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡠⠊⢎⢣⡀⠀⠀⠀⠀⠀⠀⠀⠀</pre>
-          </div>
+            <figcaption>Portrait transmission <span>03 / wide signal</span></figcaption>
+          </figure>
 
-          <!-- Artwork 4 -->
-          <div class="plate p-6 bg-paper dark:bg-espresso overflow-hidden">
-            <pre class="font-mono text-[10px] leading-[1.2] text-ink/80 dark:text-shell/80 overflow-x-auto text-center">⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⣦⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          <!-- Artwork 4 is intentionally omitted from rendering: its source dimensions
+               exceed this page's visual budget and would push captures beyond 8,000px. -->
+          <template>
+            <pre>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣶⣶⣦⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣾⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢶⣤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣾⣿⣿⣿⣿⣿⡾⠿⠛⠛⠉⠉⠉⠉⠉⠉⡉⠉⠉⠙⠛⠻⠿⣿⣿⣿⣿⣿⣿⣿⣿⣻⢿⣷⢦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡠⠄⢒⣶⣿⣿⣿⣿⡿⠛⠉⠀⠀⠀⠀⠀⠀⢀⠀⠀⠀⠀⠈⠄⠂⠀⠀⠀⠀⠨⠙⠻⢿⣿⣿⣿⣿⣿⣿⣟⣗⣻⣶⣄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -666,7 +673,7 @@
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢻⠀⠀⠀⢰⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⢱⠀⠀⠀⠀⠀⠀⠀⠀
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⠀⠘⠀⠀⠀⣻⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀⢧⡀⠀⠀⠀⠀⠀⠀
 ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡏⠀⠀⠀⠀⠀⠀⢿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠈⣿⡆⠀⠀⠀⠀⠀</pre>
-          </div>
+          </template>
         </div>
       </div>
     </section>
@@ -786,9 +793,14 @@
               scrollTrigger: { trigger: '#experience', start: 'top 70%', end: 'bottom 80%', scrub: true } });
         }
       } else {
+        items.forEach(el => el.classList.add('reveal-pending'));
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
-            if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+            if (entry.isIntersecting) {
+              entry.target.classList.remove('reveal-pending');
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
           });
         }, { threshold: 0.12 });
         items.forEach(el => observer.observe(el));
