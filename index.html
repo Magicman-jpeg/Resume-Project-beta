@@ -75,10 +75,13 @@
 
       <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8">
         <!-- top meta line -->
-        <div class="reveal flex items-center justify-between font-mono text-xs sm:text-sm text-atomic-teal dark:text-atomic-teal-bright mb-10">
+        <div class="reveal flex items-center justify-between font-mono text-xs sm:text-sm text-atomic-teal dark:text-atomic-teal-bright mb-6">
           <span>PORTFOLIO / 2026</span>
           <span class="text-ink/50 dark:text-shell/50">Quezon City, PH</span>
         </div>
+
+        <!-- Animated ASCII wave banner (JS-driven; static fallback for reduced motion) -->
+        <pre id="ascii-wave" aria-hidden="true" class="ascii ascii-wave reveal mb-10 opacity-80 w-full max-w-full"></pre>
 
         <div class="grid lg:grid-cols-12 gap-x-8 gap-y-12 items-end">
           <!-- Name — huge, baseline left -->
@@ -508,6 +511,14 @@
       <div class="reveal flex justify-center mb-5">
         <div class="w-14 h-14 animate-spin-slow" aria-hidden="true"><div class="starburst"></div></div>
       </div>
+
+      <!-- Static ASCII sign-off (original) -->
+      <pre aria-hidden="true" class="ascii ascii-static reveal mb-6 inline-block text-left mx-auto">+------------------------------------------+
+|  <span class="glow">></span> connection_request: <span class="glow">OPEN</span>              |
+|  <span class="glow">></span> status.............: available        |
+|  <span class="glow">></span> response_time......: ~24h             |
++------------------------------------------+</pre>
+
       <h2 class="display-hero text-5xl sm:text-7xl mb-4 reveal">Let's Connect</h2>
       <p class="text-ink/75 dark:text-shell/75 mb-8 reveal">
         I'm always open to new opportunities, collaborations, and conversations about cloud and tech communities.
@@ -646,6 +657,71 @@
 
     // ---- Current year ----
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ---- Animated ASCII wave (original) ----
+    // Renders a flowing sinusoidal field into a <pre>, re-drawn ~15fps.
+    // Pauses off-screen and respects reduced motion (shows one static frame).
+    (function asciiWave() {
+      const el = document.getElementById('ascii-wave');
+      if (!el) return;
+      const COLS = 120, ROWS = 10;
+      const ramp = ' .:-=+*#%@'; // low -> high intensity
+      let t = 0, running = false, rafId = null, lastDraw = 0;
+
+      function frame(now) {
+        if (!running) return;
+        // throttle to ~15fps for performance
+        if (now - lastDraw > 66) {
+          lastDraw = now;
+          let out = '';
+          for (let y = 0; y < ROWS; y++) {
+            for (let x = 0; x < COLS; x++) {
+              // two overlapping travelling waves -> intensity 0..1
+              const v =
+                Math.sin(x * 0.14 + t) * 0.5 +
+                Math.sin(x * 0.06 - t * 0.7 + y * 0.5) * 0.5;
+              const n = (v + 1) / 2; // 0..1
+              const idx = Math.max(0, Math.min(ramp.length - 1, Math.floor(n * (ramp.length - 1))));
+              out += ramp[idx];
+            }
+            out += '\n';
+          }
+          el.textContent = out;
+          t += 0.12;
+        }
+        rafId = requestAnimationFrame(frame);
+      }
+
+      function drawStatic() {
+        let out = '';
+        for (let y = 0; y < ROWS; y++) {
+          for (let x = 0; x < COLS; x++) {
+            const v = Math.sin(x * 0.14) * 0.5 + Math.sin(x * 0.06 + y * 0.5) * 0.5;
+            const n = (v + 1) / 2;
+            out += ramp[Math.floor(n * (ramp.length - 1))];
+          }
+          out += '\n';
+        }
+        el.textContent = out;
+      }
+
+      if (reduceMotion) { drawStatic(); return; }
+
+      function start() { if (!running) { running = true; lastDraw = 0; rafId = requestAnimationFrame(frame); } }
+      function stop() { running = false; if (rafId) cancelAnimationFrame(rafId); }
+
+      // Pause when the hero scrolls out of view (performance)
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach(e => e.isIntersecting ? start() : stop());
+        }, { threshold: 0 });
+        io.observe(el);
+      } else {
+        start();
+      }
+      // Pause when tab is hidden
+      document.addEventListener('visibilitychange', () => document.hidden ? stop() : start());
+    })();
   </script>
 </body>
 </html>
