@@ -5,21 +5,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Atomic-age mid-century palette with a single Y2K accent.
+        // "Early Cyber" — CRT/VHS + JRPG-menu palette: deep navy base, glowing cyan.
         // Light + dark tokens share names; dark overrides live in markup via dark:.
-        paper:   '#F4ECD8', // warm cream (light base)
-        ink:     '#2B2520', // warm near-black (light text)
-        espresso:'#1E1B18', // warm black (dark base)
-        shell:   '#EDE4D3', // cream (dark text)
+        paper:   '#F5EFEB', // beige (light base)
+        ink:     '#2F4156', // navy (light text)
+        espresso:'#0E1A2B', // deep CRT navy (dark base)
+        shell:   '#DCEAF2', // pale sky (dark text)
         atomic: {
-          orange:  '#D96E36', // burnt orange — primary
-          teal:    '#1F7A6E', // muted teal — secondary
-          gold:    '#E6B74A', // goldenrod/mustard — highlight
-          'orange-bright': '#E8824A', // dark-mode primary
-          'teal-bright':   '#3FA596', // dark-mode secondary
-          'gold-bright':   '#F0C560', // dark-mode highlight
+          // kept the token name 'atomic' so existing markup maps 1:1; values are now cyber-blue
+          orange:  '#1BB5C9', // cyan — primary accent (light)
+          teal:    '#567C8D', // steel teal — secondary
+          gold:    '#C8D9E6', // sky blue — highlight
+          'orange-bright': '#3FE0F0', // glowing cyan — dark-mode primary
+          'teal-bright':   '#7FA8BC', // lifted steel teal — dark-mode secondary
+          'gold-bright':   '#A9CBE0', // sky — dark-mode highlight
         },
-        y2k: '#8A6FD1', // iridescent violet — used once, sparingly
+        y2k: '#5BE1EB', // bright CRT cyan glow — used sparingly
       },
       fontFamily: {
         // Fraunces — soft characterful display serif (hero name, major headings)
