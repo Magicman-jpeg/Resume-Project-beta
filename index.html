@@ -100,15 +100,6 @@
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     }
 
-    /* Animated gradient text for the name */
-    .gradient-text {
-      background: linear-gradient(100deg, #6366f1, #06b6d4, #8b5cf6, #6366f1);
-      background-size: 300% 100%;
-      -webkit-background-clip: text; background-clip: text; color: transparent;
-      animation: shimmer 8s linear infinite;
-    }
-    @keyframes shimmer { to { background-position: 300% 0; } }
-
     /* Glass card tilt — reacts to pointer via JS custom props.
        Uses !important so it composes cleanly instead of fighting Tailwind's hover:-translate-y-1. */
     .tilt { transform: perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translateY(var(--ty,0px)) !important; transition: transform .25s ease-out; transform-style: preserve-3d; }
@@ -197,8 +188,8 @@
 
       <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8">
         <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-4 animate-fade-up">Hi, my name is</p>
-        <h1 class="font-display text-5xl sm:text-7xl font-bold tracking-tight leading-[1.05] animate-fade-up">
-          <span class="gradient-text">Jay Clifferson P. Arevalo</span>
+        <h1 class="font-display text-5xl sm:text-7xl font-bold tracking-tight leading-[1.05] text-slate-900 dark:text-white animate-fade-up">
+          Jay Clifferson P. Arevalo
         </h1>
         <h2 class="mt-4 text-xl sm:text-2xl font-semibold text-slate-500 dark:text-slate-400 animate-fade-up">
           Aspiring <span class="font-display italic font-semibold text-brand-blue dark:text-brand-sky">Cloud Solutions Architect</span> &amp; Systems Developer
@@ -237,7 +228,7 @@
     <section id="about" class="py-20 border-t border-slate-200 dark:border-slate-800">
       <div class="max-w-6xl mx-auto px-5 sm:px-8">
         <div class="reveal">
-          <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2">01 · About</p>
+          <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2">About</p>
           <h2 class="heading-grotesk text-5xl sm:text-6xl mb-8">Who I Am</h2>
         </div>
 
@@ -288,7 +279,7 @@
     <section id="skills" class="py-20 border-t border-slate-200 dark:border-slate-800">
       <div class="max-w-6xl mx-auto px-5 sm:px-8">
         <div class="reveal">
-          <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2">02 · Skills</p>
+          <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2">Skills</p>
           <h2 class="heading-grotesk text-5xl sm:text-6xl mb-10">Technical Toolkit</h2>
         </div>
 
@@ -361,7 +352,7 @@
     <section id="experience" class="py-20 border-t border-slate-200 dark:border-slate-800">
       <div class="max-w-6xl mx-auto px-5 sm:px-8">
         <div class="reveal">
-          <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2">03 · Experience</p>
+          <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2">Experience</p>
           <h2 class="heading-grotesk text-5xl sm:text-6xl mb-10">Experience &amp; Leadership Timeline</h2>
         </div>
 
@@ -430,7 +421,7 @@
     <section id="projects" class="py-20 border-t border-slate-200 dark:border-slate-800">
       <div class="max-w-6xl mx-auto px-5 sm:px-8">
         <div class="reveal">
-          <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2">04 · Projects</p>
+          <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2">Projects</p>
           <h2 class="heading-grotesk text-5xl sm:text-6xl mb-10">Featured Projects</h2>
         </div>
 
@@ -533,7 +524,7 @@
     <section id="leadership" class="py-20 border-t border-slate-200 dark:border-slate-800">
       <div class="max-w-6xl mx-auto px-5 sm:px-8">
         <div class="reveal">
-          <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2">05 · Leadership</p>
+          <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2">Leadership</p>
           <h2 class="heading-grotesk text-5xl sm:text-6xl mb-4">Community Involvement</h2>
           <p class="text-slate-600 dark:text-slate-400 max-w-2xl mb-10">Active across the three major tech ecosystems — Microsoft, Google, and AWS — on campus.</p>
         </div>
@@ -547,12 +538,12 @@
           <div class="reveal p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:-translate-y-1 hover:shadow-xl transition-all text-center">
             <i class="ri-google-line text-4xl text-[#4285f4] mb-3"></i>
             <h3 class="font-semibold mb-1">GDG on Campus PUP</h3>
-            <p class="text-sm text-slate-500 dark:text-slate-400">Chief Community Relations Officer · Cloud Cadet</p>
+            <p class="text-sm text-slate-500 dark:text-slate-400">Chief Community Relations Officer, and Cloud Cadet</p>
           </div>
           <div class="reveal p-6 rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50 hover:-translate-y-1 hover:shadow-xl transition-all text-center">
             <i class="ri-amazon-line text-4xl text-[#ff9900] mb-3"></i>
             <h3 class="font-semibold mb-1">AWS Cloud Club</h3>
-            <p class="text-sm text-slate-500 dark:text-slate-400">Cloud Computing &amp; Infrastructure · Skill Builder</p>
+            <p class="text-sm text-slate-500 dark:text-slate-400">Cloud Computing &amp; Infrastructure, Skill Builder Program</p>
           </div>
         </div>
       </div>
@@ -562,7 +553,7 @@
   <!-- ============ CONTACT FOOTER ============ -->
   <footer id="contact" class="py-20 border-t border-slate-200 dark:border-slate-800 grid-bg">
     <div class="max-w-3xl mx-auto px-5 sm:px-8 text-center">
-      <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2 reveal">06 · Contact</p>
+      <p class="font-mono text-sm text-brand-indigo dark:text-brand-sky mb-2 reveal">Contact</p>
       <h2 class="font-display text-4xl sm:text-5xl font-bold mb-4 reveal">Let's Connect</h2>
       <p class="text-slate-600 dark:text-slate-400 mb-8 reveal">
         I'm always open to new opportunities, collaborations, and conversations about cloud and tech communities.
