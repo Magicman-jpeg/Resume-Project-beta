@@ -84,19 +84,6 @@ body { font-family: 'Inter', sans-serif; }
 }
 .dark .starburst { background: repeating-conic-gradient(from 0deg, #E8824A 0deg 6deg, transparent 6deg 18deg); }
 
-/* ---- Boomerang / lozenge section divider (original) ---- */
-.boomerang {
-  width: 72px; height: 18px; border-radius: 999px;
-  background: linear-gradient(90deg, #D96E36, #E6B74A);
-  position: relative;
-}
-.boomerang::before, .boomerang::after {
-  content: ""; position: absolute; top: 50%; width: 10px; height: 10px; border-radius: 50%;
-  transform: translateY(-50%);
-}
-.boomerang::before { left: -22px; background: #1F7A6E; }
-.boomerang::after  { right: -22px; background: #1F7A6E; }
-
 /* ---- Y2K frosted / iridescent panel — used ONCE in the hero ---- */
 .y2k-panel {
   position: relative;
