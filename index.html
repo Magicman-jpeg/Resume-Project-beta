@@ -27,6 +27,9 @@
   <!-- Skip link -->
   <a href="#about" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:px-4 focus:py-2 focus:rounded-lg focus:bg-atomic-orange focus:text-paper">Skip to content</a>
 
+  <!-- Page-wide faint ASCII data layer (JS-filled, drifts extremely slowly) -->
+  <pre id="ascii-bg" aria-hidden="true" class="ascii-bg"></pre>
+
   <!-- ============ NAVBAR ============ -->
   <header id="navbar" class="fixed top-0 inset-x-0 z-50 border-b-2 border-ink/15 dark:border-shell/15 bg-paper/85 dark:bg-espresso/85 backdrop-blur-md transition-colors duration-300">
     <nav class="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
@@ -68,10 +71,16 @@
     </div>
   </header>
 
-  <main>
+  <main class="relative z-10">
     <!-- ============ HERO — asymmetric, big type, offset Y2K panel ============ -->
     <section id="hero" class="relative pt-28 pb-20 sm:pt-32 sm:pb-24 grid-bg overflow-hidden">
       <div class="aurora" aria-hidden="true"></div>
+      <pre aria-hidden="true" class="ascii-corner hidden sm:block top-20 right-4">  ┌─┐·░▒▓
+  ┤ ├─┐
+  └─┘ │·▒░
+ ·░▒ └──┐
+      │·▒
+ ▓▒░──┘</pre>
 
       <div class="relative z-10 max-w-6xl mx-auto px-5 sm:px-8">
         <!-- top meta line -->
@@ -304,7 +313,12 @@
     </section>
 
     <!-- ============ No. 04 — PROJECTS (asymmetric) + LEADERSHIP band (paper) ============ -->
-    <section id="projects" class="py-24 border-t-2 border-ink/15 dark:border-shell/15">
+    <section id="projects" class="relative overflow-hidden py-24 border-t-2 border-ink/15 dark:border-shell/15">
+      <pre aria-hidden="true" class="ascii-corner hidden sm:block bottom-10 left-2">▓▒░·
+│ ┌──┐
+└─┤  ├·░▒
+  └──┘
+ ·▒░ ▓</pre>
       <div class="max-w-6xl mx-auto px-5 sm:px-8">
         <div class="reveal grid lg:grid-cols-12 gap-6 items-baseline mb-12">
           <div class="lg:col-span-1 index-plate text-5xl sm:text-6xl text-atomic-orange">04</div>
@@ -506,7 +520,11 @@
   </main>
 
   <!-- ============ CONTACT FOOTER (espresso-tinted band) ============ -->
-  <footer id="contact" class="py-24 border-t-2 border-ink/15 dark:border-shell/15 grid-bg">
+  <footer id="contact" class="relative z-10 overflow-hidden py-24 border-t-2 border-ink/15 dark:border-shell/15 grid-bg">
+    <pre aria-hidden="true" class="ascii-corner hidden sm:block top-10 right-4">·░▒▓
+┌──┐ │
+│  ├─┘
+└──┘·▒░</pre>
     <div class="max-w-3xl mx-auto px-5 sm:px-8 text-center">
       <div class="reveal flex justify-center mb-5">
         <div class="w-14 h-14 animate-spin-slow" aria-hidden="true"><div class="starburst"></div></div>
@@ -657,6 +675,25 @@
 
     // ---- Current year ----
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ---- Page-wide faint ASCII data layer (original, static text; CSS drifts it slowly) ----
+    (function asciiBackground() {
+      const el = document.getElementById('ascii-bg');
+      if (!el) return;
+      const glyphs = '01<>/\\|-+=*:.· ░▒{}[]';
+      const COLS = 160, ROWS = 150; // taller than viewport so the slow drift has room
+      // Deterministic-ish fill weighted toward spaces so it reads as faint texture.
+      let out = '';
+      for (let y = 0; y < ROWS; y++) {
+        for (let x = 0; x < COLS; x++) {
+          // mostly blank, occasional glyph -> sparse "data" feel
+          const r = Math.random();
+          out += r > 0.82 ? glyphs[Math.floor(Math.random() * glyphs.length)] : ' ';
+        }
+        out += '\n';
+      }
+      el.textContent = out;
+    })();
 
     // ---- Animated ASCII wave (original) ----
     // Renders a flowing sinusoidal field into a <pre>, re-drawn ~15fps.
