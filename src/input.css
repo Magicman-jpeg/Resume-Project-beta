@@ -233,22 +233,6 @@ a:focus-visible, button:focus-visible { outline: 2px solid #1BB5C9; outline-offs
   margin: 0;
 }
 
-/* ---- Page-wide faint ASCII data layer (behind all content) ---- */
-.ascii-bg {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none;
-  font-family: 'Fira Code', ui-monospace, monospace;
-  white-space: pre; overflow: hidden;
-  font-size: 11px; line-height: 1.25;
-  color: #567C8D; opacity: .06;
-  /* extremely slow vertical drift */
-  animation: ascii-drift 180s linear infinite;
-}
-.dark .ascii-bg { color: #3FE0F0; opacity: .05; }
-@keyframes ascii-drift {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-33%); }
-}
-
 /* ---- Per-section ASCII corner accents (static, decorative) ---- */
 .ascii-corner {
   position: absolute; pointer-events: none; z-index: 0;
@@ -278,51 +262,37 @@ a:focus-visible, button:focus-visible { outline: 2px solid #1BB5C9; outline-offs
   .reveal { opacity: 1 !important; transform: none !important; }
   .starburst { animation: none !important; }
   .grain::after { animation: none !important; }
-  .ascii-bg { animation: none !important; }
 }
 
-/* ---- ASCII gallery: responsive crops, not full-size source dumps ---- */
-.ascii-gallery-section {
-  background:
-    linear-gradient(90deg, transparent 0 49.9%, rgba(27,181,201,.08) 50%, transparent 50.1%),
-    linear-gradient(rgba(27,181,201,.05) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 72px;
-}
-.ascii-gallery {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: clamp(1rem, 2vw, 1.5rem);
-  align-items: start;
-}
-.ascii-art-panel {
-  position: relative;
-  min-width: 0;
-  margin: 0;
+/* ---- Fixed ASCII parallax stage ---- */
+main { isolation: isolate; }
+main > section { position: relative; z-index: 1; }
+.ascii-art-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
   overflow: hidden;
-  isolation: isolate;
-  background: rgba(245,239,235,.72);
-  box-shadow: 8px 8px 0 rgba(86,124,141,.14);
+  pointer-events: none;
+  user-select: none;
+  contain: layout paint style;
 }
-.dark .ascii-art-panel {
-  background: rgba(14,26,43,.82);
-  box-shadow: 8px 8px 0 rgba(63,224,240,.08);
+.ascii-art-field { position: absolute; inset: 0; }
+.ascii-art-panel {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  mix-blend-mode: multiply;
+  will-change: transform, opacity;
 }
-.ascii-art-panel--portrait {
-  grid-column: 1 / span 5;
-  height: 22rem;
-}
-.ascii-art-panel--wide {
-  grid-column: 6 / -1;
-  height: 22rem;
-}
-.ascii-art-panel--feature {
-  grid-column: 2 / -1;
-  height: 31rem;
-  margin-top: .5rem;
-}
+.ascii-art-panel--portrait { opacity: .11; }
+.dark .ascii-art-panel { mix-blend-mode: screen; }
+.dark .ascii-art-panel--portrait { opacity: .11; }
 .ascii-art {
   position: absolute;
-  top: 46%;
+  top: 50%;
   left: 50%;
   width: max-content;
   max-width: none;
@@ -332,67 +302,25 @@ a:focus-visible, button:focus-visible { outline: 2px solid #1BB5C9; outline-offs
   line-height: 1.18;
   white-space: pre;
   color: #2F4156;
-  opacity: .88;
-  user-select: none;
-  pointer-events: none;
   transform-origin: center;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 84%, transparent 100%);
-          mask-image: linear-gradient(to bottom, transparent 0, #000 8%, #000 84%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 40%, transparent 78%);
+          mask-image: radial-gradient(ellipse at center, #000 40%, transparent 78%);
 }
 .dark .ascii-art {
-  color: #7FA8BC;
-  text-shadow: 0 0 9px rgba(63,224,240,.18);
+  color: #3FE0F0;
+  text-shadow: 0 0 10px rgba(63,224,240,.16);
 }
-.ascii-art-panel--portrait .ascii-art { transform: translate(-50%, -50%) scale(1.35); }
-.ascii-art-panel--wide .ascii-art { transform: translate(-50%, -47%) scale(.8); }
-.ascii-art-panel--feature .ascii-art { top: 50%; transform: translate(-50%, -50%) scale(.82); }
-.ascii-art-panel figcaption {
-  position: absolute;
-  z-index: 2;
-  right: 1rem;
-  bottom: .85rem;
-  left: 1rem;
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-top: .6rem;
-  border-top: 1px solid rgba(47,65,86,.35);
-  font-family: 'Space Grotesk', 'Inter', sans-serif;
-  font-size: .78rem;
-  font-weight: 600;
-  color: #2F4156;
-}
-.ascii-art-panel figcaption span {
-  font-family: 'Fira Code', ui-monospace, monospace;
-  font-size: .68rem;
-  font-weight: 400;
-  color: #496675;
-}
-.dark .ascii-art-panel figcaption {
-  border-color: rgba(220,234,242,.28);
-  color: #DCEAF2;
-}
-.dark .ascii-art-panel figcaption span { color: #7FA8BC; }
+.ascii-art-panel--portrait .ascii-art { left: 72%; transform: translate(-50%, -50%) scale(2.35); }
+.ascii-art-panel--wide .ascii-art { left: 38%; transform: translate(-50%, -50%) scale(1.4); }
+.ascii-art-panel--feature .ascii-art { left: 68%; transform: translate(-50%, -50%) scale(1.08); }
 
 @media (max-width: 767px) {
-  .ascii-gallery { grid-template-columns: 1fr; }
-  .ascii-art-panel--portrait,
-  .ascii-art-panel--wide,
-  .ascii-art-panel--feature {
-    grid-column: 1;
-    margin-top: 0;
-  }
-  .ascii-art-panel--portrait { height: 19rem; }
-  .ascii-art-panel--wide { height: 21rem; }
-  .ascii-art-panel--feature { height: 25rem; }
-  .ascii-art-panel--portrait .ascii-art { transform: translate(-50%, -52%) scale(1.1); }
-  .ascii-art-panel--wide .ascii-art { transform: translate(-50%, -47%) scale(.58); }
-  .ascii-art-panel--feature .ascii-art { transform: translate(-50%, -50%) scale(.6); }
+  .ascii-art-panel--portrait { opacity: .09; }
+  .ascii-art-panel--portrait .ascii-art { left: 72%; transform: translate(-50%, -50%) scale(1.8); }
+  .ascii-art-panel--wide .ascii-art { left: 34%; transform: translate(-50%, -50%) scale(1.05); }
+  .ascii-art-panel--feature .ascii-art { left: 68%; transform: translate(-50%, -50%) scale(.8); }
 }
 
-@media (max-width: 420px) {
-  .ascii-art-panel figcaption { font-size: .72rem; }
-  .ascii-art-panel figcaption span { display: none; }
-  .ascii-art-panel--wide .ascii-art { transform: translate(-50%, -47%) scale(.5); }
-  .ascii-art-panel--feature .ascii-art { transform: translate(-50%, -50%) scale(.5); }
+@media (prefers-reduced-motion: reduce) {
+  .ascii-art-panel { will-change: auto; }
 }
