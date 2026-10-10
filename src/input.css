@@ -36,6 +36,47 @@ body { font-family: 'Inter', sans-serif; }
 
 /* ---- Thin confident mid-century rule ---- */
 .hairline { height: 2px; background: currentColor; opacity: .85; }
+.rule-thick { height: 4px; background: currentColor; }
+
+/* ---- Oversized section index plate ("No. 01") ---- */
+.index-plate {
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+/* ---- "Plate" framing — thick bordered block with corner ticks (blueprint/catalog) ---- */
+.plate {
+  position: relative;
+  border: 2px solid var(--edge, #2B2520);
+  border-radius: 4px;
+  background: transparent;
+}
+.dark .plate { --edge: #EDE4D3; }
+.plate::before, .plate::after {
+  content: ""; position: absolute; width: 12px; height: 12px;
+  border: 2px solid var(--tick, #D96E36); pointer-events: none;
+}
+/* top-left + bottom-right corner ticks */
+.plate::before { top: -6px; left: -6px; border-right: 0; border-bottom: 0; }
+.plate::after  { bottom: -6px; right: -6px; border-left: 0; border-top: 0; }
+
+/* ---- Spec-sheet row (mid-century catalog listing) ---- */
+.spec-row {
+  display: grid;
+  grid-template-columns: minmax(140px, 0.9fr) 2.6fr;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  border-top: 2px solid var(--edge, rgba(43,37,32,.15));
+  align-items: start;
+}
+.dark .spec-row { --edge: rgba(237,228,211,.16); }
+.spec-row:last-child { border-bottom: 2px solid var(--edge, rgba(43,37,32,.15)); }
+@media (max-width: 640px) {
+  .spec-row { grid-template-columns: 1fr; gap: .5rem; }
+}
 
 /* ---- Atomic grid: warm goldenrod lines on the hero/contact ---- */
 .grid-bg {
