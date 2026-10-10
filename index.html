@@ -30,8 +30,8 @@
   <!-- ============ NAVBAR ============ -->
   <header id="navbar" class="fixed top-0 inset-x-0 z-50 border-b-2 border-ink/15 dark:border-shell/15 bg-paper/85 dark:bg-espresso/85 backdrop-blur-md transition-colors duration-300">
     <nav class="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-      <a href="#hero" class="font-mono font-semibold text-lg tracking-tight">
-        <span class="text-atomic-orange">&lt;</span>JC<span class="text-atomic-teal dark:text-atomic-teal-bright">A</span><span class="text-atomic-orange">/&gt;</span>
+      <a href="#hero" aria-label="JC — home" class="group inline-flex items-center gap-1.5 font-mono font-semibold text-sm sm:text-base tracking-tight px-2.5 py-1 rounded-md border-2 border-ink/20 dark:border-shell/20 group-hover:border-atomic-orange transition-colors">
+        <span class="text-atomic-teal dark:text-atomic-teal-bright">~/</span><span>JC</span><span class="text-atomic-orange">.md</span><span class="inline-block w-[7px] h-4 bg-atomic-orange align-middle animate-blink" aria-hidden="true"></span>
       </a>
 
       <ul class="hidden md:flex items-center gap-7 font-grotesk text-sm font-medium">
@@ -83,6 +83,12 @@
         <div class="grid lg:grid-cols-12 gap-x-8 gap-y-12 items-end">
           <!-- Name — huge, baseline left -->
           <div class="lg:col-span-8">
+            <pre aria-hidden="true" class="font-mono text-atomic-orange leading-none mb-5 animate-fade-up select-none text-[clamp(0.3rem,1.5vw,0.7rem)] overflow-hidden">     ██╗ ██████╗
+     ██║██╔════╝
+     ██║██║
+██   ██║██║
+╚█████╔╝╚██████╗
+ ╚════╝  ╚═════╝</pre>
             <p class="font-mono text-sm text-ink/60 dark:text-shell/60 mb-4 animate-fade-up">Hi, my name is</p>
             <h1 class="display-hero text-[clamp(3.2rem,11vw,8.5rem)] animate-fade-up">
               Jay Clifferson<br />
@@ -428,6 +434,46 @@
                 <h3 class="font-grotesk font-semibold text-sm">AWS Cloud Club PUP</h3>
                 <p class="text-xs text-ink/60 dark:text-shell/60">Cloud Computing &amp; Infrastructure, Skill Builder</p>
               </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Also involved with — full org list, grouped by year -->
+        <div class="reveal mt-10">
+          <div class="flex items-center gap-3 mb-6">
+            <span class="font-mono text-xs text-atomic-teal dark:text-atomic-teal-bright">ALSO INVOLVED WITH</span>
+            <div class="hairline flex-1 text-ink/20 dark:text-shell/20"></div>
+          </div>
+
+          <div class="grid md:grid-cols-2 gap-x-10 gap-y-8">
+            <!-- 2025 -->
+            <div>
+              <p class="index-plate text-atomic-orange text-2xl mb-4">2025</p>
+              <ul class="space-y-3 text-sm">
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">The Programmers' Guild (TPG)</span><span class="text-ink/55 dark:text-shell/55 text-right">Member</span></li>
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">PUP Microsoft Student Community</span><span class="text-ink/55 dark:text-shell/55 text-right">Junior Web Developer</span></li>
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">AWS Cloud Club PUP</span><span class="text-ink/55 dark:text-shell/55 text-right">Member, Dept. of Data Technologies</span></li>
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">Google Developer Groups on Campus PUP</span><span class="text-ink/55 dark:text-shell/55 text-right">Cloud Solutions Team</span></li>
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">Junior Blockchain Education Consortium PH — PUP Manila</span><span class="text-ink/55 dark:text-shell/55 text-right">Member</span></li>
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">IBITS — Institute of Bachelors in IT Studies</span><span class="text-ink/55 dark:text-shell/55 text-right">Deputy Head, Linkages &amp; External Affairs</span></li>
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">BSIT 2-3 "Cutie Pa2-3" (Class Section)</span><span class="text-ink/55 dark:text-shell/55 text-right">Creative Team Captain &amp; Graphic Designer</span></li>
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">PSUCCESS</span><span class="text-ink/55 dark:text-shell/55 text-right">Public Relations Officer</span></li>
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">AWS Kiro</span><span class="text-ink/55 dark:text-shell/55 text-right">Logistics</span></li>
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">AWS User Group e:Novators Philippines</span><span class="text-ink/55 dark:text-shell/55 text-right">Logistics</span></li>
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">CyberPH</span><span class="text-ink/55 dark:text-shell/55 text-right">Operations &amp; Logistics</span></li>
+              </ul>
+            </div>
+
+            <!-- 2026 -->
+            <div>
+              <p class="index-plate text-atomic-orange text-2xl mb-4">2026</p>
+              <ul class="space-y-3 text-sm">
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">Workflow PH</span><span class="text-ink/55 dark:text-shell/55 text-right">Operations</span></li>
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">ARK PH — AcademiTech Research and Knowledge</span><span class="text-ink/55 dark:text-shell/55 text-right">Operations</span></li>
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">MSC PUP</span><span class="text-ink/55 dark:text-shell/55 text-right">Operations Chief</span></li>
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">Seekers Guild</span><span class="text-ink/55 dark:text-shell/55 text-right">Logistics Head</span></li>
+                <li class="flex justify-between gap-4 border-t-2 border-ink/10 dark:border-shell/10 pt-3"><span class="font-grotesk font-medium">GDG on Campus PUP</span><span class="text-ink/55 dark:text-shell/55 text-right">Community Relations Head</span></li>
+              </ul>
             </div>
           </div>
         </div>
